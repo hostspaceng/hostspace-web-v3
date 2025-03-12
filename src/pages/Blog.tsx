@@ -114,7 +114,7 @@ export function BlogPage() {
   const [featuredRef, featuredInView] = useInView();
   const [postsRef, postsInView] = useInView();
   const [newsletterRef, newsletterInView] = useInView();
-
+  const [blogs, setBlogs] = useState();
   const [activeCategory, setActiveCategory] = useState("All Posts");
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -135,13 +135,16 @@ export function BlogPage() {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
-        return await response.json();
+        const data = await response.json();
+        setBlogs(data);
       } catch (error) {
         console.error("Error fetching blogs:", error);
       }
     }
     getBlogs();
   }, []);
+
+  console.log(blogs);
 
   return (
     <main className="flex-1">

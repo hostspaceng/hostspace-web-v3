@@ -1,4 +1,4 @@
-import { ArrowRight, Quote, Calendar, Clock, User } from "lucide-react";
+import { ArrowRight, Quote, Calendar, User } from "lucide-react";
 import { InfiniteSlider } from "@/components/InfiniteSlider";
 import { useInView } from "@/hooks/useInView";
 import { Link } from "react-router-dom";
@@ -33,7 +33,7 @@ export function HomePage() {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const unProcessedblogs = await response.json();
-        const processedBlogs = unProcessedblogs?.items?.map((post) => {
+        const processedBlogs = unProcessedblogs?.items?.map((post: any) => {
           const firstParagraph = extractFirstParagraph(post.content); // Use the new function
           return { ...post, content: firstParagraph };
         });
@@ -155,10 +155,13 @@ export function HomePage() {
             </div>
             <div className="order-1 lg:order-2">
               <div className="relative fade-in hover-float">
-                <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 to-cyan-600/20 rounded-xl blur-3xl" />
-                <div className="h-[400px] rounded-2xl bg-gradient-to-r from-blue-600 to-cyan-600 flex items-center justify-center">
-                  {/* <img src="/icons/HCS.svg" className="h-32 w-32" /> */}
-                </div>
+                {/* <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 to-cyan-600/20 rounded-xl blur-3xl" /> */}
+                {/* <div className="h-[400px] rounded-2xl bg-gradient-to-r from-blue-600 to-cyan-600 flex items-center justify-center"> */}
+                <img
+                  src="/mockups/hcs-mockup-1.png"
+                  className="object-contain rounded-2xl  flex items-center justify-center"
+                />
+                {/* </div> */}
               </div>
             </div>
           </div>
@@ -391,7 +394,7 @@ export function HomePage() {
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {blogs?.slice(0, 3)?.map((blog) => {
+              {blogs?.slice(0, 3)?.map((blog: any) => {
                 return (
                   <article className="group">
                     <div className="relative overflow-hidden rounded-xl mb-4">

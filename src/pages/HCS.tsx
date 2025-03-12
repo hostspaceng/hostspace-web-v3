@@ -294,6 +294,12 @@ export function HCSPage() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="md:col-span-2 lg:col-span-4">
+              <img
+                src="/mockups/hcs-app-deploy-options.png"
+                className="object-contain rounded-2xl  flex items-center justify-center"
+              />{" "}
+            </div>
             {/* GitHub Public Repos */}
             <div className="group relative bg-background/40 backdrop-blur-xl border border-white/10 p-8 rounded-xl hover-lift">
               <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/5 to-cyan-600/5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -375,6 +381,12 @@ export function HCSPage() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="md:col-span-2 lg:col-span-3">
+              <img
+                src="/mockups/hcs-service-deploy-options.png"
+                className="object-contain rounded-2xl  flex items-center justify-center"
+              />{" "}
+            </div>
             {serviceCategories.map((category) => (
               <div
                 key={category.name}

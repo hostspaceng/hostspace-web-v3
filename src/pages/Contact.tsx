@@ -1,47 +1,59 @@
-import { Mail, Phone, MapPin, Globe, MessageSquare, Clock, ArrowRight } from 'lucide-react';
-import { useInView } from '@/hooks/useInView';
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Globe,
+  MessageSquare,
+  Clock,
+  ArrowRight,
+} from "lucide-react";
+import { useInView } from "@/hooks/useInView";
 
 const contactMethods = [
   {
     icon: Mail,
-    title: 'Email',
-    description: 'Our friendly team is here to help.',
-    value: 'support@hostspace.com',
-    link: 'mailto:support@hostspace.com'
+    title: "Email",
+    description: "Our friendly team is here to help.",
+    value: "admin@hostspacecloud.com",
+    link: "mailto:admin@hostspacecloud.com",
   },
   {
     icon: Phone,
-    title: 'Phone',
-    description: 'Mon-Fri from 8am to 5pm.',
-    value: '+234 (800) 123-4567',
-    link: 'tel:+2348001234567'
+    title: "Phone",
+    description: "Mon-Fri from 8am to 5pm.",
+    value: "+234 (800) 123-4567",
+    link: "tel:+2348001234567",
   },
   {
     icon: MapPin,
-    title: 'Office',
-    description: 'Come say hello at our office.',
-    value: 'Lagos, Nigeria',
-    link: 'https://maps.google.com'
-  }
+    title: "Office",
+    description: "Come say hello at our office.",
+    value: "Lagos, Nigeria",
+    link: "https://maps.google.com",
+  },
 ];
 
 const faqs = [
   {
-    question: 'How quickly can I deploy my first container?',
-    answer: 'You can deploy your first container in less than 5 minutes. Our platform provides a simple, intuitive interface for quick deployments.'
+    question: "How quickly can I deploy my first container?",
+    answer:
+      "You can deploy your first container in less than 5 minutes. Our platform provides a simple, intuitive interface for quick deployments.",
   },
   {
-    question: 'What support options are available?',
-    answer: 'We offer 24/7 technical support through email and chat. Enterprise customers get additional phone support and dedicated account managers.'
+    question: "What support options are available?",
+    answer:
+      "We offer 24/7 technical support through email and chat. Enterprise customers get additional phone support and dedicated account managers.",
   },
   {
-    question: 'Do you offer custom solutions?',
-    answer: 'Yes, we provide custom solutions tailored to your specific needs. Contact our sales team to discuss your requirements.'
+    question: "Do you offer custom solutions?",
+    answer:
+      "Yes, we provide custom solutions tailored to your specific needs. Contact our sales team to discuss your requirements.",
   },
   {
-    question: 'What security measures do you have in place?',
-    answer: 'We implement industry-standard security practices including encryption, firewalls, and regular security audits to protect your data.'
-  }
+    question: "What security measures do you have in place?",
+    answer:
+      "We implement industry-standard security practices including encryption, firewalls, and regular security audits to protect your data.",
+  },
 ];
 
 export function ContactPage() {
@@ -53,9 +65,11 @@ export function ContactPage() {
   return (
     <main className="flex-1">
       {/* Hero Section */}
-      <section 
-        ref={heroRef} 
-        className={`relative pt-32 pb-20 overflow-hidden ${heroInView ? 'fade-in' : ''}`}
+      <section
+        ref={heroRef}
+        className={`relative pt-32 pb-20 overflow-hidden ${
+          heroInView ? "fade-in" : ""
+        }`}
       >
         <div className="absolute inset-0 bg-gradient-to-b from-blue-500/5 to-transparent" />
         <div className="max-w-[1200px] mx-auto px-6 relative">
@@ -71,16 +85,17 @@ export function ContactPage() {
               </span>
             </h1>
             <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Have questions about our platform? Want to learn more about our services? We're here to help.
+              Have questions about our platform? Want to learn more about our
+              services? We're here to help.
             </p>
           </div>
         </div>
       </section>
 
       {/* Contact Methods */}
-      <section 
+      <section
         ref={methodsRef}
-        className={`py-24 relative ${methodsInView ? 'fade-in' : ''}`}
+        className={`py-24 relative ${methodsInView ? "fade-in" : ""}`}
       >
         <div className="max-w-[1200px] mx-auto px-6">
           <div className="grid md:grid-cols-3 gap-8">
@@ -97,7 +112,9 @@ export function ContactPage() {
                     <div className="w-12 h-12 rounded-lg bg-blue-600/10 flex items-center justify-center mb-6">
                       <Icon className="h-6 w-6 text-blue-600" />
                     </div>
-                    <h3 className="text-xl font-semibold mb-2">{method.title}</h3>
+                    <h3 className="text-xl font-semibold mb-2">
+                      {method.title}
+                    </h3>
                     <p className="text-sm text-muted-foreground mb-4">
                       {method.description}
                     </p>
@@ -111,9 +128,11 @@ export function ContactPage() {
       </section>
 
       {/* Contact Form */}
-      <section 
+      <section
         ref={formRef}
-        className={`py-24 bg-blue-50/50 dark:bg-blue-950/20 relative ${formInView ? 'fade-in' : ''}`}
+        className={`py-24 bg-blue-50/50 dark:bg-blue-950/20 relative ${
+          formInView ? "fade-in" : ""
+        }`}
       >
         <div className="max-w-[1200px] mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-24">
@@ -122,13 +141,17 @@ export function ContactPage() {
                 Send us a Message
               </h2>
               <p className="text-lg text-muted-foreground mb-8">
-                Fill out the form below and we'll get back to you as soon as possible.
+                Fill out the form below and we'll get back to you as soon as
+                possible.
               </p>
 
               <form className="space-y-6">
                 <div className="grid sm:grid-cols-2 gap-6">
                   <div>
-                    <label htmlFor="firstName" className="block text-sm font-medium mb-2">
+                    <label
+                      htmlFor="firstName"
+                      className="block text-sm font-medium mb-2"
+                    >
                       First Name
                     </label>
                     <input
@@ -138,7 +161,10 @@ export function ContactPage() {
                     />
                   </div>
                   <div>
-                    <label htmlFor="lastName" className="block text-sm font-medium mb-2">
+                    <label
+                      htmlFor="lastName"
+                      className="block text-sm font-medium mb-2"
+                    >
                       Last Name
                     </label>
                     <input
@@ -150,7 +176,10 @@ export function ContactPage() {
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium mb-2">
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium mb-2"
+                  >
                     Email
                   </label>
                   <input
@@ -161,7 +190,10 @@ export function ContactPage() {
                 </div>
 
                 <div>
-                  <label htmlFor="subject" className="block text-sm font-medium mb-2">
+                  <label
+                    htmlFor="subject"
+                    className="block text-sm font-medium mb-2"
+                  >
                     Subject
                   </label>
                   <input
@@ -172,7 +204,10 @@ export function ContactPage() {
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium mb-2">
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-medium mb-2"
+                  >
                     Message
                   </label>
                   <textarea
@@ -207,7 +242,9 @@ export function ContactPage() {
                   >
                     <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/5 to-cyan-600/5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity" />
                     <div className="relative">
-                      <h3 className="text-lg font-semibold mb-2">{faq.question}</h3>
+                      <h3 className="text-lg font-semibold mb-2">
+                        {faq.question}
+                      </h3>
                       <p className="text-muted-foreground">{faq.answer}</p>
                     </div>
                   </div>
@@ -219,9 +256,9 @@ export function ContactPage() {
       </section>
 
       {/* Support Features */}
-      <section 
+      <section
         ref={faqRef}
-        className={`py-24 relative ${faqInView ? 'fade-in' : ''}`}
+        className={`py-24 relative ${faqInView ? "fade-in" : ""}`}
       >
         <div className="max-w-[1200px] mx-auto px-6">
           <div className="grid md:grid-cols-3 gap-8">
@@ -231,9 +268,12 @@ export function ContactPage() {
                 <div className="w-12 h-12 rounded-lg bg-blue-600/10 flex items-center justify-center mb-6">
                   <MessageSquare className="h-6 w-6 text-blue-600" />
                 </div>
-                <h3 className="text-xl font-semibold mb-3">Live Chat Support</h3>
+                <h3 className="text-xl font-semibold mb-3">
+                  Live Chat Support
+                </h3>
                 <p className="text-muted-foreground">
-                  Get instant help from our technical support team through live chat.
+                  Get instant help from our technical support team through live
+                  chat.
                 </p>
               </div>
             </div>
@@ -244,7 +284,9 @@ export function ContactPage() {
                 <div className="w-12 h-12 rounded-lg bg-blue-600/10 flex items-center justify-center mb-6">
                   <Clock className="h-6 w-6 text-blue-600" />
                 </div>
-                <h3 className="text-xl font-semibold mb-3">24/7 Availability</h3>
+                <h3 className="text-xl font-semibold mb-3">
+                  24/7 Availability
+                </h3>
                 <p className="text-muted-foreground">
                   Our support team is available round the clock to assist you.
                 </p>
@@ -259,7 +301,8 @@ export function ContactPage() {
                 </div>
                 <h3 className="text-xl font-semibold mb-3">Global Support</h3>
                 <p className="text-muted-foreground">
-                  Support available in multiple languages across different time zones.
+                  Support available in multiple languages across different time
+                  zones.
                 </p>
               </div>
             </div>
