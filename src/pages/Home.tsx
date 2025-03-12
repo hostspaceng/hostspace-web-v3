@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { extractFirstParagraph } from "@/lib/helpers/removeHTMLTags";
 import dayjs from "dayjs";
+import { Button } from "@/components/ui/button";
 
 export function HomePage() {
   const [heroRef, heroInView] = useInView();
@@ -102,7 +103,7 @@ export function HomePage() {
           } mt-32 relative`}
         >
           <div className="bg-opacity-0 relative grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            <div className="order-2 lg:order-1">
+            <div className="order-2 lg:order-1 text-left ">
               <div className="space-y-6">
                 <div className="inline-flex items-center rounded-full px-3 py-1 text-sm font-medium bg-blue-600/10 text-blue-600">
                   HostSpace Container Services
@@ -183,7 +184,7 @@ export function HomePage() {
                 </div>
               </div>
             </div>
-            <div className="order-2">
+            <div className="order-2 text-left">
               <div className="space-y-6">
                 <div className="inline-flex items-center rounded-full px-3 py-1 text-sm font-medium bg-purple-600/10 text-purple-600">
                   HostSpace Kubernetes Engine
@@ -241,7 +242,7 @@ export function HomePage() {
           } mt-40 relative`}
         >
           <div className="relative grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            <div className="order-2 lg:order-1">
+            <div className="order-2 lg:order-1 text-left">
               <div className="space-y-6">
                 <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm font-medium bg-blue-600/10 text-blue-600">
                   HostSpace Managed Databases
@@ -433,10 +434,12 @@ export function HomePage() {
             </div>
 
             <div className="mt-12 text-center">
-              <button className="cta-button bg-primary text-primary-foreground px-8 py-4 rounded-full text-base font-medium transition-all duration-300 inline-flex items-center justify-center">
-                View All Posts{" "}
-                <ArrowRight className="ml-2 h-4 w-4 arrow-icon" />
-              </button>
+              <Link to="/blog">
+                <Button className="cta-button bg-primary text-primary-foreground px-8 py-8 rounded-full text-base font-medium transition-all duration-300 inline-flex items-center justify-center">
+                  View All Posts{" "}
+                  <ArrowRight className="ml-2 h-4 w-4 arrow-icon" />
+                </Button>
+              </Link>
             </div>
           </div>
         </section>
