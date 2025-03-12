@@ -1,128 +1,34 @@
 import { useEffect, useState } from "react";
 import { useInView } from "@/hooks/useInView";
-import { Calendar, Clock, ArrowRight, Search } from "lucide-react";
+import { Calendar, ArrowRight, Search } from "lucide-react";
+import { extractFirstParagraph } from "@/lib/helpers/removeHTMLTags";
 
-const categories = [
-  { name: "All Posts", count: 24 },
-  { name: "Cloud Infrastructure", count: 8 },
-  { name: "DevOps", count: 6 },
-  { name: "Kubernetes", count: 5 },
-  { name: "Security", count: 3 },
-  { name: "Tutorials", count: 2 },
-];
-
-const featuredPosts = [
-  {
-    title: "The Future of Cloud Native Infrastructure",
-    excerpt:
-      "Explore how cloud native technologies are reshaping the future of infrastructure and application deployment.",
-    category: "Cloud Infrastructure",
-    image:
-      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1200&h=600",
-    author: {
-      name: "Sarah Johnson",
-      avatar:
-        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=200&h=200",
-    },
-    date: "Mar 15, 2024",
-    readTime: "8 min read",
-    featured: true,
-  },
-  {
-    title: "Kubernetes Best Practices for Production",
-    excerpt:
-      "Learn essential best practices for running Kubernetes in production environments, from security to monitoring.",
-    category: "Kubernetes",
-    image:
-      "https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?auto=format&fit=crop&q=80&w=1200&h=600",
-    author: {
-      name: "Michael Chen",
-      avatar:
-        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200&h=200",
-    },
-    date: "Mar 12, 2024",
-    readTime: "10 min read",
-    featured: true,
-  },
-];
-
-const posts = [
-  {
-    title: "Optimizing Container Resource Usage",
-    excerpt:
-      "Tips and strategies for optimizing resource allocation and usage in containerized environments.",
-    category: "DevOps",
-    image:
-      "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=800&h=500",
-    author: {
-      name: "David Kim",
-      avatar:
-        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200&h=200",
-    },
-    date: "Mar 10, 2024",
-    readTime: "6 min read",
-  },
-  {
-    title: "Securing Your Cloud Infrastructure",
-    excerpt:
-      "A comprehensive guide to implementing security best practices in your cloud infrastructure.",
-    category: "Security",
-    image:
-      "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800&h=500",
-    author: {
-      name: "Aisha Patel",
-      avatar:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=200&h=200",
-    },
-    date: "Mar 8, 2024",
-    readTime: "12 min read",
-  },
-  {
-    title: "Getting Started with Container Services",
-    excerpt:
-      "A beginner-friendly guide to understanding and working with container services.",
-    category: "Tutorials",
-    image:
-      "https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&q=80&w=800&h=500",
-    author: {
-      name: "Sarah Johnson",
-      avatar:
-        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=200&h=200",
-    },
-    date: "Mar 5, 2024",
-    readTime: "8 min read",
-  },
-  {
-    title: "Monitoring Kubernetes Clusters",
-    excerpt:
-      "Learn how to set up effective monitoring for your Kubernetes clusters using modern tools.",
-    category: "Kubernetes",
-    image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800&h=500",
-    author: {
-      name: "Michael Chen",
-      avatar:
-        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200&h=200",
-    },
-    date: "Mar 3, 2024",
-    readTime: "7 min read",
-  },
-];
+export interface BlogPost {
+  guid: string;
+  link: string;
+  title: string;
+  content: string;
+  description: any;
+  author: string;
+  pubDate: string;
+  categories: string[];
+}
 
 export function BlogPage() {
   const [heroRef, heroInView] = useInView();
   const [featuredRef, featuredInView] = useInView();
   const [postsRef, postsInView] = useInView();
   const [newsletterRef, newsletterInView] = useInView();
-  const [blogs, setBlogs] = useState();
+  const [blogs, setBlogs] = useState<{ items: BlogPost[] }>();
   const [activeCategory, setActiveCategory] = useState("All Posts");
   const [searchQuery, setSearchQuery] = useState("");
+  const [categories, setCategories] = useState<string[]>([]);
 
   useEffect(() => {
     async function getBlogs() {
       try {
         const response = await fetch(
-          "https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/HostSpaceng",
+          `https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/HostSpaceng&api_key=vwuasxg9iloky36e5wienphw61n0vfvxpmz9ov9s&count=${20}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -137,6 +43,12 @@ export function BlogPage() {
 
         const data = await response.json();
         setBlogs(data);
+        const allCats = [
+          ...new Set(data.items.flatMap((item: BlogPost) => item.categories)),
+        ];
+        setCategories(allCats as string[]);
+
+        console.log(data);
       } catch (error) {
         console.error("Error fetching blogs:", error);
       }
@@ -144,8 +56,26 @@ export function BlogPage() {
     getBlogs();
   }, []);
 
-  console.log(blogs);
+  const processedBlogs = blogs?.items?.map((blog: any) => {
+    const firstParagraph = extractFirstParagraph(blog?.content); // Use the new function
+    return { ...blog, content: firstParagraph };
+  });
 
+  const filteredBlogs = processedBlogs?.filter((blog) => {
+    const lowerCaseQuery = searchQuery.toLowerCase();
+    const matchesSearch =
+      blog?.title?.toLowerCase().includes(lowerCaseQuery) ||
+      blog?.author?.toLowerCase().includes(lowerCaseQuery) ||
+      blog?.content?.toLowerCase().includes(lowerCaseQuery);
+
+    const matchesCategory =
+      activeCategory === "All Posts" ||
+      blog.categories.includes(activeCategory);
+
+    return matchesSearch && matchesCategory;
+  });
+
+  console.log(filteredBlogs);
   return (
     <main className="flex-1">
       {/* Hero Section */}
@@ -197,50 +127,48 @@ export function BlogPage() {
             Featured Articles
           </h2>
           <div className="grid lg:grid-cols-2 gap-8">
-            {featuredPosts.map((post) => (
-              <article key={post.title} className="group">
+            {filteredBlogs?.slice(0, 2).map((blog) => (
+              <article key={blog.title} className="group">
                 <div className="relative overflow-hidden rounded-xl mb-6">
                   <div className="absolute inset-0 bg-gradient-to-tr from-black/20 to-black/0 z-10" />
                   <img
-                    src={post.image}
-                    alt={post.title}
+                    src={blog?.description?.match(/<img.*?src="(.*?)"/)[1]}
+                    alt={blog.title}
                     className="aspect-[2/1] object-cover w-full transform transition-transform duration-300 group-hover:scale-105"
                   />
                   <div className="absolute top-4 left-4 z-20">
-                    <span className="inline-flex items-center rounded-full px-3 py-1 text-sm font-medium bg-blue-600/90 text-white backdrop-blur-sm">
-                      {post.category}
-                    </span>
+                    {blog.categories.slice(0, 3).map((category: string) => (
+                      <span className="capitalize mr-1.5 inline-flex items-center rounded-full px-3 py-1 text-sm font-medium bg-blue-600/90 text-white backdrop-blur-sm">
+                        {category}
+                      </span>
+                    ))}
                   </div>
                 </div>
                 <div className="space-y-4">
                   <div className="flex items-center gap-4">
                     <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 rounded-full overflow-hidden">
-                        <img
-                          src={post.author.avatar}
-                          alt={post.author.name}
-                          className="w-full h-full object-cover"
-                        />
+                      <div className="w-8 h-8 rounded-full border flex items-center justify-center p-1.5 overflow-hidden">
+                        {blog.author
+                          .split(" ")
+                          .map((word: string) => word[0])
+                          .join("")
+                          .toUpperCase()}
                       </div>
-                      <span className="text-sm font-medium">
-                        {post.author.name}
-                      </span>
+                      <span className="text-sm font-medium">{blog.author}</span>
                     </div>
                     <div className="flex items-center gap-4 text-sm text-muted-foreground">
                       <span className="flex items-center gap-1">
                         <Calendar className="h-4 w-4" />
-                        {post.date}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <Clock className="h-4 w-4" />
-                        {post.readTime}
+                        {blog.pubDate}
                       </span>
                     </div>
                   </div>
                   <h3 className="text-2xl font-bold group-hover:text-blue-600 transition-colors">
-                    {post.title}
+                    {blog.title}
                   </h3>
-                  <p className="text-muted-foreground">{post.excerpt}</p>
+                  <p className="text-muted-foreground line-clamp-3">
+                    {blog.content}
+                  </p>
                   <button className="text-blue-600 font-medium inline-flex items-center gap-2 group-hover:gap-3 transition-all">
                     Read More <ArrowRight className="h-4 w-4" />
                   </button>
@@ -264,23 +192,27 @@ export function BlogPage() {
             <div className="w-full md:w-64 shrink-0 space-y-8">
               <div>
                 <h3 className="text-lg font-semibold mb-4">Categories</h3>
-                <div className="space-y-2">
-                  {categories.map((category) => (
-                    <button
-                      key={category.name}
-                      onClick={() => setActiveCategory(category.name)}
-                      className={`w-full flex items-center justify-between px-4 py-2 rounded-lg text-sm transition-colors ${
-                        activeCategory === category.name
-                          ? "bg-blue-600 text-white"
-                          : "hover:bg-secondary"
-                      }`}
-                    >
-                      <span>{category.name}</span>
-                      <span className="text-xs opacity-70">
-                        {category.count}
-                      </span>
-                    </button>
-                  ))}
+                <div className="space-y-2 h-96 overflow-scroll">
+                  {categories?.map((category) => {
+                    const count = blogs?.items?.filter((blog) =>
+                      blog.categories.includes(category)
+                    ).length;
+
+                    return (
+                      <button
+                        key={category}
+                        onClick={() => setActiveCategory(category)}
+                        className={`capitalize block w-full text-left px-4 py-2 rounded-md  ${
+                          activeCategory === category
+                            ? "bg-blue-600 text-white"
+                            : "hover:bg-gray-100 dark:hover:bg-gray-800"
+                        }`}
+                      >
+                        {category}{" "}
+                        <span className="font-mono text-xs"> ({count})</span>
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
             </div>
@@ -288,51 +220,53 @@ export function BlogPage() {
             {/* Posts Grid */}
             <div className="flex-1">
               <div className="grid md:grid-cols-2 gap-8">
-                {posts.map((post) => (
-                  <article key={post.title} className="group">
+                {filteredBlogs?.slice(2).map((blog) => (
+                  <article key={blog.title} className="group text-left">
                     <div className="relative overflow-hidden rounded-xl mb-4">
                       <div className="absolute inset-0 bg-gradient-to-tr from-black/20 to-black/0 z-10" />
                       <img
-                        src={post.image}
-                        alt={post.title}
+                        src={blog?.description?.match(/<img.*?src="(.*?)"/)[1]}
+                        alt={blog.title}
                         className="aspect-[2/1] object-cover w-full transform transition-transform duration-300 group-hover:scale-105"
                       />
                       <div className="absolute top-4 left-4 z-20">
-                        <span className="inline-flex items-center rounded-full px-3 py-1 text-sm font-medium bg-blue-600/90 text-white backdrop-blur-sm">
-                          {post.category}
-                        </span>
+                        {blog.categories.slice(0, 3).map((category: string) => (
+                          <span className="capitalize mr-1.5 inline-flex items-center rounded-full px-3 py-1 text-sm font-medium bg-blue-600/90 text-white backdrop-blur-sm">
+                            {category}
+                          </span>
+                        ))}
                       </div>
                     </div>
                     <div className="space-y-3">
                       <div className="flex items-center gap-4">
                         <div className="flex items-center gap-2">
                           <div className="w-6 h-6 rounded-full overflow-hidden">
-                            <img
-                              src={post.author.avatar}
-                              alt={post.author.name}
-                              className="w-full h-full object-cover"
-                            />
+                            <div className="w-full h-full object-cover border p-1 rounded-full text-center flex items-center justify-center">
+                              <span className="text-muted-foreground text-xs">
+                                {blog.author
+                                  .split(" ")
+                                  .map((word: string) => word[0])
+                                  .join("")
+                                  .toUpperCase()}
+                              </span>
+                            </div>
                           </div>
                           <span className="text-sm font-medium">
-                            {post.author.name}
+                            {blog.author}
                           </span>
                         </div>
                         <div className="flex items-center gap-4 text-sm text-muted-foreground">
                           <span className="flex items-center gap-1">
                             <Calendar className="h-4 w-4" />
-                            {post.date}
-                          </span>
-                          <span className="flex items-center gap-1">
-                            <Clock className="h-4 w-4" />
-                            {post.readTime}
+                            {blog.pubDate}
                           </span>
                         </div>
                       </div>
-                      <h3 className="text-xl font-bold group-hover:text-blue-600 transition-colors">
-                        {post.title}
+                      <h3 className="text-xl font-bold group-hover:text-blue-600 transition-colors line-clamp-2">
+                        {blog.title}
                       </h3>
                       <p className="text-muted-foreground line-clamp-2">
-                        {post.excerpt}
+                        {blog.content}
                       </p>
                       <button className="text-blue-600 font-medium inline-flex items-center gap-2 group-hover:gap-3 transition-all">
                         Read More <ArrowRight className="h-4 w-4" />

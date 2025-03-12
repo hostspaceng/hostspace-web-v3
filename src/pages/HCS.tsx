@@ -1,20 +1,14 @@
 import {
-  Server,
   ArrowRight,
   Shield,
-  Gauge,
-  Zap,
   Github,
   Box,
   Dock as Docker,
   Terminal,
-  Globe,
   Activity,
   Lock,
   Database,
-  Cpu,
   Network,
-  GitBranch,
   Workflow,
   Blocks,
   Layers,
@@ -23,7 +17,6 @@ import {
   Play,
   Users,
   Search,
-  Plus,
 } from "lucide-react";
 import { useInView } from "@/hooks/useInView";
 import { useState } from "react";

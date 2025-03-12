@@ -1,10 +1,19 @@
-import { Calendar, Clock, ArrowLeft, Share2, Bookmark, ThumbsUp, MessageSquare } from 'lucide-react';
-import { useInView } from '@/hooks/useInView';
+import {
+  Calendar,
+  Clock,
+  ArrowLeft,
+  Share2,
+  Bookmark,
+  ThumbsUp,
+  MessageSquare,
+} from "lucide-react";
+import { useInView } from "@/hooks/useInView";
 
 // This would typically come from an API or CMS
 const post = {
-  title: 'The Future of Cloud Native Infrastructure',
-  excerpt: 'Explore how cloud native technologies are reshaping the future of infrastructure and application deployment.',
+  title: "The Future of Cloud Native Infrastructure",
+  excerpt:
+    "Explore how cloud native technologies are reshaping the future of infrastructure and application deployment.",
   content: `
     <p>Cloud native technologies have revolutionized how we build and deploy applications. In this comprehensive guide, we'll explore the latest trends and best practices in cloud native infrastructure.</p>
 
@@ -37,35 +46,47 @@ const post = {
       <li>Enhanced security measures</li>
     </ul>
   `,
-  category: 'Cloud Infrastructure',
-  image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1200&h=600',
+  category: "Cloud Infrastructure",
+  image:
+    "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1200&h=600",
   author: {
-    name: 'Sarah Johnson',
-    avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=200&h=200',
-    role: 'Cloud Infrastructure Lead',
-    bio: 'Sarah has over 10 years of experience in cloud infrastructure and DevOps practices.'
+    name: "Sarah Johnson",
+    avatar:
+      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=200&h=200",
+    role: "Cloud Infrastructure Lead",
+    bio: "Sarah has over 10 years of experience in cloud infrastructure and DevOps practices.",
   },
-  date: 'Mar 15, 2024',
-  readTime: '8 min read',
-  tags: ['Cloud Native', 'Infrastructure', 'DevOps', 'Kubernetes', 'Containers'],
+  date: "Mar 15, 2024",
+  readTime: "8 min read",
+  tags: [
+    "Cloud Native",
+    "Infrastructure",
+    "DevOps",
+    "Kubernetes",
+    "Containers",
+  ],
   relatedPosts: [
     {
-      title: 'Kubernetes Best Practices for Production',
-      excerpt: 'Learn essential best practices for running Kubernetes in production environments.',
-      image: 'https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?auto=format&fit=crop&q=80&w=800&h=500',
-      category: 'Kubernetes',
-      date: 'Mar 12, 2024',
-      readTime: '10 min read'
+      title: "Kubernetes Best Practices for Production",
+      excerpt:
+        "Learn essential best practices for running Kubernetes in production environments.",
+      image:
+        "https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?auto=format&fit=crop&q=80&w=800&h=500",
+      category: "Kubernetes",
+      date: "Mar 12, 2024",
+      readTime: "10 min read",
     },
     {
-      title: 'Optimizing Container Resource Usage',
-      excerpt: 'Tips and strategies for optimizing resource allocation in containerized environments.',
-      image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=800&h=500',
-      category: 'DevOps',
-      date: 'Mar 10, 2024',
-      readTime: '6 min read'
-    }
-  ]
+      title: "Optimizing Container Resource Usage",
+      excerpt:
+        "Tips and strategies for optimizing resource allocation in containerized environments.",
+      image:
+        "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=800&h=500",
+      category: "DevOps",
+      date: "Mar 10, 2024",
+      readTime: "6 min read",
+    },
+  ],
 };
 
 export function BlogPost() {
@@ -77,9 +98,11 @@ export function BlogPost() {
   return (
     <main className="flex-1">
       {/* Hero Section */}
-      <section 
-        ref={heroRef} 
-        className={`relative pt-32 pb-20 overflow-hidden ${heroInView ? 'fade-in' : ''}`}
+      <section
+        ref={heroRef}
+        className={`relative pt-32 pb-20 overflow-hidden ${
+          heroInView ? "fade-in" : ""
+        }`}
       >
         <div className="absolute inset-0 bg-gradient-to-b from-blue-500/5 to-transparent" />
         <div className="max-w-[1200px] mx-auto px-6 relative">
@@ -91,7 +114,7 @@ export function BlogPost() {
               <ArrowLeft className="h-4 w-4" />
               Back to Blog
             </a>
-            
+
             <div className="space-y-4">
               <div className="inline-flex items-center rounded-full px-3 py-1 text-sm font-medium bg-blue-600/10 text-blue-600">
                 {post.category}
@@ -111,7 +134,9 @@ export function BlogPost() {
                   />
                 </div>
                 <div className="text-left">
-                  <div className="font-medium text-foreground">{post.author.name}</div>
+                  <div className="font-medium text-foreground">
+                    {post.author.name}
+                  </div>
                   <div className="text-xs">{post.author.role}</div>
                 </div>
               </div>
@@ -144,16 +169,16 @@ export function BlogPost() {
       </div>
 
       {/* Content Section */}
-      <section 
+      <section
         ref={contentRef}
-        className={`py-16 relative ${contentInView ? 'fade-in' : ''}`}
+        className={`py-16 relative ${contentInView ? "fade-in" : ""}`}
       >
         <div className="max-w-[1200px] mx-auto px-6">
           <div className="grid lg:grid-cols-[1fr_300px] gap-12">
             {/* Main Content */}
             <div className="prose prose-lg dark:prose-invert max-w-none">
               <div dangerouslySetInnerHTML={{ __html: post.content }} />
-              
+
               {/* Tags */}
               <div className="flex flex-wrap gap-2 mt-8 not-prose">
                 {post.tags.map((tag) => (
@@ -190,9 +215,12 @@ export function BlogPost() {
             {/* Sidebar */}
             <div className="space-y-8">
               {/* Author Card */}
-              <div 
+              <div
+                // @ts-expect-error
                 ref={authorRef}
-                className={`bg-card border rounded-xl p-6 ${authorInView ? 'fade-in' : ''}`}
+                className={`bg-card border rounded-xl p-6 ${
+                  authorInView ? "fade-in" : ""
+                }`}
               >
                 <div className="flex items-center gap-4 mb-4">
                   <div className="w-16 h-16 rounded-full overflow-hidden">
@@ -203,8 +231,12 @@ export function BlogPost() {
                     />
                   </div>
                   <div>
-                    <div className="font-semibold text-lg">{post.author.name}</div>
-                    <div className="text-sm text-muted-foreground">{post.author.role}</div>
+                    <div className="font-semibold text-lg">
+                      {post.author.name}
+                    </div>
+                    <div className="text-sm text-muted-foreground">
+                      {post.author.role}
+                    </div>
                   </div>
                 </div>
                 <p className="text-sm text-muted-foreground mb-4">
@@ -216,9 +248,10 @@ export function BlogPost() {
               </div>
 
               {/* Related Posts */}
-              <div 
+              <div
+                //  @ts-expect-error error
                 ref={relatedRef}
-                className={`space-y-6 ${relatedInView ? 'fade-in' : ''}`}
+                className={`space-y-6 ${relatedInView ? "fade-in" : ""}`}
               >
                 <h3 className="font-semibold text-lg">Related Articles</h3>
                 {post.relatedPosts.map((relatedPost) => (

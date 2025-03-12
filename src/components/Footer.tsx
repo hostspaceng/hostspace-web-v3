@@ -126,11 +126,11 @@ export function Footer() {
                             className="text-sm text-muted-foreground hover:text-foreground transition-colors inline-flex items-center gap-2"
                           >
                             {subItem.name}
-                            {subItem.badge && (
+                            {/* {subItem.badge && (
                               <span className="px-2 py-0.5 text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300 rounded-full">
                                 {subItem.badge}
                               </span>
-                            )}
+                            )} */}
                           </a>
                         </li>
                       ))}

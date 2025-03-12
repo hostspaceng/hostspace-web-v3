@@ -1,17 +1,4 @@
-import {
-  ArrowRight,
-  Users,
-  Target,
-  Rocket,
-  Globe,
-  Building2,
-  Server,
-  Cloud,
-  Database,
-  Shield,
-  Zap,
-  Heart,
-} from "lucide-react";
+import { Globe, Shield, Zap, Heart } from "lucide-react";
 import { useInView } from "@/hooks/useInView";
 
 const stats = [
@@ -69,33 +56,6 @@ const timeline = [
   },
 ];
 
-const team = [
-  {
-    name: "Sarah Johnson",
-    role: "CEO & Co-founder",
-    image:
-      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=200&h=200",
-  },
-  {
-    name: "Michael Chen",
-    role: "CTO & Co-founder",
-    image:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200&h=200",
-  },
-  {
-    name: "Aisha Patel",
-    role: "Head of Engineering",
-    image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=200&h=200",
-  },
-  {
-    name: "David Kim",
-    role: "Head of Product",
-    image:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200&h=200",
-  },
-];
-
 const values = [
   {
     icon: Heart,
@@ -128,7 +88,6 @@ export function AboutPage() {
   const [statsRef, statsInView] = useInView();
   const [missionRef, missionInView] = useInView();
   const [timelineRef, timelineInView] = useInView();
-  const [teamRef, teamInView] = useInView();
   const [valuesRef, valuesInView] = useInView();
 
   return (

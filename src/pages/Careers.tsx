@@ -6,14 +6,10 @@ import {
   Zap,
   Globe,
   BookOpen,
-  Coffee,
   Bike,
   Gift,
   Laptop,
   Plane,
-  Smile,
-  BadgeCheck,
-  Wifi,
   WifiIcon,
   Search,
 } from "lucide-react";
@@ -311,7 +307,7 @@ export function CareersPage() {
           <div className="space-y-6">
             {departments
               ?.find((dept) => dept.name === activeDepartment)
-              ?.positions.map((position) => (
+              ?.positions.map((position: any) => (
                 <div
                   key={position.title}
                   className="group relative bg-background/40 backdrop-blur-xl border border-white/10 p-8 rounded-xl hover-lift"
