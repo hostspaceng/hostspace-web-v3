@@ -23,7 +23,7 @@ const navLinks = [
       },
       {
         name: "HostSpace Managed Databases",
-        href: "#managed-databases",
+        href: "/products/managed-databases",
         icon: Database,
         description: "Fully managed database solutions",
         badge: "Coming Soon",

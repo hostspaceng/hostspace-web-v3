@@ -11,6 +11,7 @@ import { BlogPage } from "@/pages/Blog";
 import { BlogPost } from "@/pages/BlogPost";
 import { ContactPage } from "@/pages/Contact";
 import ScrollToTop from "./lib/helpers/scrollToTop";
+import { HMDPage } from "./pages/HMD";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/products/container-service" element={<HCSPage />} />
           <Route path="/products/kubernetes-engine" element={<HKEPage />} />
+          <Route path="/products/managed-databases" element={<HMDPage />} />
           <Route path="/careers" element={<CareersPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/blog" element={<BlogPage />} />
