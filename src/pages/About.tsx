@@ -29,15 +29,15 @@ const timeline = [
   },
   {
     year: "2024",
-    title: "HostSpace Container Services",
-    description:
-      "Launched our first product for one-click app and service deployment.",
-  },
-  {
-    year: "2024",
     title: "HostSpace Kubernetes Engine",
     description:
       "Launched enterprise-grade Kubernetes solutions for seamless scaling.",
+  },
+  {
+    year: "2024",
+    title: "HostSpace Container Services",
+    description:
+      "Launched our first product for one-click app and service deployment.",
   },
 
   {
@@ -45,7 +45,6 @@ const timeline = [
     title: "Managed Databases",
     description:
       "Launching fully managed database solutions for seamless operations.",
-    upcoming: true,
   },
   {
     year: "2025",

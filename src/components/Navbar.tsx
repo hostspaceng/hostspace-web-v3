@@ -12,13 +12,13 @@ const navLinks = [
       {
         name: "HostSpace Container Services",
         href: "/products/container-service",
-        icon: Box,
+        img: "/HCS-Icon.svg",
         description: "Powerful container management made simple",
       },
       {
         name: "HostSpace Kubernetes Engine",
         href: "/products/kubernetes-engine",
-        icon: Cloud,
+        img: "/HKE-Icon.svg",
         description: "Enterprise-grade Kubernetes orchestration",
       },
       {
@@ -26,7 +26,7 @@ const navLinks = [
         href: "/products/managed-databases",
         icon: Database,
         description: "Fully managed database solutions",
-        badge: "Coming Soon",
+        // badge: "Coming Soon",
       },
     ],
   },
@@ -113,7 +113,12 @@ export function Navbar() {
                               >
                                 <div className="flex-shrink-0">
                                   <div className="w-10 h-10 rounded-lg bg-white border shadow-sm flex items-center justify-center">
-                                    <item.icon className="h-5 w-5 text-foreground" />
+                                    {item.img && (
+                                      <img
+                                        src={`./icons/${item.img}`}
+                                        className="p-1 object-cover text-foreground"
+                                      />
+                                    )}
                                   </div>
                                 </div>
                                 <div className="flex-1">
@@ -121,11 +126,11 @@ export function Navbar() {
                                     <span className="font-medium text-base">
                                       {item.name}
                                     </span>
-                                    {item.badge && (
+                                    {/* {item.badge && (
                                       <span className="px-2 py-0.5 text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300 rounded-full">
                                         {item.badge}
                                       </span>
-                                    )}
+                                    )} */}
                                   </div>
                                   <div className="text-sm text-muted-foreground mt-1">
                                     {item.description}
@@ -216,15 +221,18 @@ export function Navbar() {
                               }}
                             >
                               <div className="w-8 h-8 rounded-lg bg-white border shadow-sm flex items-center justify-center">
-                                <item.icon className="h-4 w-4 text-foreground" />
+                                <img
+                                  src={`./icons/${item.img}`}
+                                  className="h-4 w-4 text-foreground"
+                                />
                               </div>
                               <div className="flex items-center gap-2">
                                 <span>{item.name}</span>
-                                {item.badge && (
+                                {/* {item.badge && (
                                   <span className="px-2 py-0.5 text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300 rounded-full">
                                     {item.badge}
                                   </span>
-                                )}
+                                )} */}
                               </div>
                             </Link>
                           </div>

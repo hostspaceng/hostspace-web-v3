@@ -294,7 +294,7 @@ export function HCSPage() {
               />{" "}
             </div>
             {/* GitHub Public Repos */}
-            <div className="group relative bg-background/40 backdrop-blur-xl border border-white/10 p-8 rounded-xl hover-lift">
+            <div className="group relative bg-background/40 backdrop-blur-xl border border-input   p-8 rounded-xl hover-lift">
               <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/5 to-cyan-600/5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity" />
               <div className="relative">
                 <div className="w-12 h-12 rounded-lg bg-blue-600/10 flex items-center justify-center mb-6">
@@ -309,7 +309,7 @@ export function HCSPage() {
             </div>
 
             {/* GitHub Private Repos */}
-            <div className="group relative bg-background/40 backdrop-blur-xl border border-white/10 p-8 rounded-xl hover-lift">
+            <div className="group relative bg-background/40 backdrop-blur-xl border border-input   p-8 rounded-xl hover-lift">
               <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/5 to-cyan-600/5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity" />
               <div className="relative">
                 <div className="w-12 h-12 rounded-lg bg-purple-600/10 flex items-center justify-center mb-6">
@@ -324,7 +324,7 @@ export function HCSPage() {
             </div>
 
             {/* Docker Compose */}
-            <div className="group relative bg-background/40 backdrop-blur-xl border border-white/10 p-8 rounded-xl hover-lift">
+            <div className="group relative bg-background/40 backdrop-blur-xl border border-input   p-8 rounded-xl hover-lift">
               <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/5 to-cyan-600/5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity" />
               <div className="relative">
                 <div className="w-12 h-12 rounded-lg bg-cyan-600/10 flex items-center justify-center mb-6">
@@ -339,7 +339,7 @@ export function HCSPage() {
             </div>
 
             {/* Dockerfile */}
-            <div className="group relative bg-background/40 backdrop-blur-xl border border-white/10 p-8 rounded-xl hover-lift">
+            <div className="group relative bg-background/40 backdrop-blur-xl border border-input   p-8 rounded-xl hover-lift">
               <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/5 to-cyan-600/5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity" />
               <div className="relative">
                 <div className="w-12 h-12 rounded-lg bg-blue-600/10 flex items-center justify-center mb-6">
@@ -383,7 +383,7 @@ export function HCSPage() {
             {serviceCategories.map((category) => (
               <div
                 key={category.name}
-                className={`group relative bg-background/40 backdrop-blur-xl border border-white/10 p-8 rounded-xl transition-all duration-300 ${
+                className={`shadow-none group relative bg-background/40 backdrop-blur-xl border border-input p-8 rounded-xl transition-all duration-300 ${
                   activeCategory === category.name
                     ? "scale-105 shadow-xl border-blue-500/50"
                     : "hover:scale-102 hover:shadow-lg"
@@ -461,7 +461,7 @@ export function HCSPage() {
             {features.map((feature) => (
               <div
                 key={feature.id}
-                className={`group relative bg-background/40 backdrop-blur-xl border border-white/10 p-8 rounded-xl transition-all duration-300 ${
+                className={`group relative bg-background/40 backdrop-blur-xl border border-input   p-8 rounded-xl transition-all duration-300 ${
                   activeFeature === feature.id
                     ? "scale-105 shadow-xl border-blue-500/50"
                     : "hover:scale-102 hover:shadow-lg"

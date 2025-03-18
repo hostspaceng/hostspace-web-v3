@@ -6,8 +6,12 @@ import {
   MessageSquare,
   Clock,
   ArrowRight,
+  Loader2,
 } from "lucide-react";
 import { useInView } from "@/hooks/useInView";
+import { useState } from "react";
+import emailjs from "emailjs-com";
+import { useToast } from "@/hooks/use-toast";
 
 const contactMethods = [
   {
@@ -61,6 +65,85 @@ export function ContactPage() {
   const [methodsRef, methodsInView] = useInView();
   const [formRef, formInView] = useInView();
   const [faqRef, faqInView] = useInView();
+  const { toast } = useToast();
+  const [formData, setFormData] = useState({
+    from_name: "",
+    user_email: "",
+    user_phone: "",
+    message: "",
+    to_name: "HostSpace Admin",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors] = useState({
+    from_name: "",
+    user_email: "",
+    user_phone: "",
+    message: "",
+  });
+
+  const validate = () => {
+    const newErrors: any = {
+      from_name: formData.from_name ? "" : "Full Name is required.",
+      user_phone: formData.user_phone ? "" : "Phone Number is required.",
+
+      user_email: /^\S+@\S+\.\S+$/.test(formData.user_email)
+        ? ""
+        : "A valid Email Address is required.",
+      message: formData.message ? "" : "Message cannot be empty.",
+    };
+
+    setErrors(newErrors);
+
+    return Object.values(newErrors).every((error) => error === "");
+  };
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!validate()) return;
+
+    setIsSubmitting(true);
+
+    emailjs
+      .send(
+        "service_pofnd1f",
+        "template_meemdp8",
+        formData,
+        "F_nIEl5I8_V857t1G"
+      )
+      .then(
+        (response) => {
+          console.log(response);
+          setIsSubmitting(false);
+          toast({ title: "Message sent successfully!" });
+          setFormData({
+            from_name: "",
+            user_email: "",
+            user_phone: "",
+            message: "",
+            to_name: "HostSpace Admin",
+          });
+          setErrors({
+            from_name: "",
+            user_email: "",
+            user_phone: "",
+            message: "",
+          });
+        },
+        (error) => {
+          console.error(error);
+          setIsSubmitting(false);
+          toast({ title: "Failed to send message. Please try again later." });
+        }
+      );
+  };
 
   return (
     <main className="flex-1">
@@ -145,83 +228,103 @@ export function ContactPage() {
                 possible.
               </p>
 
-              <form className="space-y-6">
-                <div className="grid sm:grid-cols-2 gap-6">
-                  <div>
-                    <label
-                      htmlFor="firstName"
-                      className="block text-sm font-medium mb-2"
-                    >
-                      First Name
-                    </label>
-                    <input
-                      type="text"
-                      id="firstName"
-                      className="w-full px-4 py-3 rounded-lg bg-background border border-input focus:border-blue-600 focus:ring focus:ring-blue-600/20 transition-colors"
-                    />
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="lastName"
-                      className="block text-sm font-medium mb-2"
-                    >
-                      Last Name
-                    </label>
-                    <input
-                      type="text"
-                      id="lastName"
-                      className="w-full px-4 py-3 rounded-lg bg-background border border-input focus:border-blue-600 focus:ring focus:ring-blue-600/20 transition-colors"
-                    />
-                  </div>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div>
+                  <label
+                    htmlFor="fullname"
+                    className="block text-sm font-medium mb-2"
+                  >
+                    Name <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="fullname"
+                    name="from_name"
+                    value={formData.from_name}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 rounded-lg bg-background border border-input focus:border-blue-600 focus:ring focus:ring-blue-600/20 transition-colors"
+                  />
+                  {errors.from_name && (
+                    <p className="text-red-500 font-mono text-xs mt-1">
+                      {errors.from_name}
+                    </p>
+                  )}
                 </div>
-
                 <div>
                   <label
                     htmlFor="email"
                     className="block text-sm font-medium mb-2"
                   >
-                    Email
+                    Email <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="email"
                     id="email"
+                    name="user_email"
+                    value={formData.user_email}
+                    onChange={handleChange}
                     className="w-full px-4 py-3 rounded-lg bg-background border border-input focus:border-blue-600 focus:ring focus:ring-blue-600/20 transition-colors"
                   />
+                  {errors.user_email && (
+                    <p className="text-red-500 font-mono text-xs mt-1">
+                      {errors.user_email}
+                    </p>
+                  )}
                 </div>
-
                 <div>
                   <label
-                    htmlFor="subject"
+                    htmlFor="phone"
                     className="block text-sm font-medium mb-2"
                   >
-                    Subject
+                    Phone <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="text"
-                    id="subject"
+                    id="phone"
+                    name="user_phone"
+                    value={formData.user_phone}
+                    onChange={handleChange}
                     className="w-full px-4 py-3 rounded-lg bg-background border border-input focus:border-blue-600 focus:ring focus:ring-blue-600/20 transition-colors"
                   />
+                  {errors.user_phone && (
+                    <p className="text-red-500 font-mono text-xs mt-1">
+                      {errors.user_phone}
+                    </p>
+                  )}
                 </div>
-
                 <div>
                   <label
                     htmlFor="message"
                     className="block text-sm font-medium mb-2"
                   >
-                    Message
+                    Message <span className="text-red-500">*</span>
                   </label>
                   <textarea
                     id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
                     rows={6}
                     className="w-full px-4 py-3 rounded-lg bg-background border border-input focus:border-blue-600 focus:ring focus:ring-blue-600/20 transition-colors resize-none"
                   ></textarea>
+                  {errors.message && (
+                    <p className="text-red-500 font-mono text-xs mt-1">
+                      {errors.message}
+                    </p>
+                  )}
                 </div>
 
                 <button
                   type="submit"
                   className="w-full bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full text-base font-medium transition-all duration-300 inline-flex items-center justify-center"
+                  disabled={isSubmitting}
                 >
-                  Send Message <ArrowRight className="ml-2 h-4 w-4" />
+                  Send Message
+                  {isSubmitting ? (
+                    <Loader2 className="ml-2 h-4 w-4 animate-spin" />
+                  ) : (
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  )}
                 </button>
               </form>
             </div>

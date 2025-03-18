@@ -240,7 +240,10 @@ export function HKEPage() {
           </div>
         </div>
       </section>
-
+      <img
+        src="/mockups/HKE-mockup-2.png"
+        className="object-contain rounded-2xl  flex items-center justify-center"
+      />{" "}
       {/* Cluster Creation Section */}
       <section
         ref={clusterRef}
@@ -320,8 +323,11 @@ export function HKEPage() {
           </div>
         </div>
       </section>
-
       {/* Marketplace Section */}
+      <img
+        src="/mockups/HKE-mockup-1.png"
+        className="object-contain rounded-2xl  flex items-center justify-center"
+      />{" "}
       <section
         ref={marketplaceRef}
         className={`py-24 bg-purple-50/50 dark:bg-purple-950/20 relative ${
@@ -400,7 +406,6 @@ export function HKEPage() {
           </div>
         </div>
       </section>
-
       {/* Features Grid */}
       <section
         ref={featuresRef}

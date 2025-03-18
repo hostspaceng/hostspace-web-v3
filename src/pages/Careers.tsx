@@ -163,7 +163,7 @@ export function CareersPage() {
         <div className="max-w-[1200px] mx-auto px-6 relative">
           <div className="flex flex-col items-center text-center space-y-8">
             <div className="inline-flex items-center rounded-full px-3 py-1 text-sm font-medium bg-blue-600/10 text-blue-600">
-              We're Hiring!
+              Join HostSpace
             </div>
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1]">
               Join Us in Building the

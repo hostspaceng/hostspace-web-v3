@@ -178,10 +178,10 @@ export function HomePage() {
           <div className="relative grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <div className="order-1">
               <div className="relative fade-in hover-float">
-                <div className="absolute inset-0 bg-gradient-to-tr from-purple-600/20 to-pink-600/20 rounded-xl blur-3xl" />
-                <div className="h-[450px] rounded-2xl w-[1200x]  bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center">
-                  {/* <img src="/icons/HCS.svg" className="h-32 w-32" /> */}
-                </div>
+                <img
+                  src="/mockups/HKE-mockup-4.png"
+                  className="object-contain rounded-2xl  flex items-center justify-center"
+                />
               </div>
             </div>
             <div className="order-2 text-left">
