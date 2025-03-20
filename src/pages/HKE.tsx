@@ -2,195 +2,216 @@ import {
   Cloud,
   ArrowRight,
   Shield,
-  Gauge,
-  Globe,
   Activity,
   Lock,
   Database,
   Network,
   Workflow,
-  Blocks,
   Plus,
+  FilePenLine,
   Server,
+  Archive,
+  FolderKanban,
+  Bot,
 } from "lucide-react";
 import { useInView } from "@/hooks/useInView";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const marketplaceCategories = [
   {
+    name: "CMS",
+    icon: FilePenLine,
+    color: "purple",
+    services: ["WordPress"],
+  },
+  {
     name: "DevOps Tools",
     icon: Workflow,
-    color: "blue",
-    services: ["ArgoCD", "Jenkins", "GitLab Runner", "Tekton"],
+    color: "purple",
+    services: ["ArgoCD"],
+  },
+  {
+    name: "Storage",
+    icon: Archive,
+    color: "purple",
+    services: ["NFS"],
+  },
+  {
+    name: "Management",
+    icon: FolderKanban,
+    color: "purple",
+    services: ["Portainer"],
+  },
+  {
+    name: "Security",
+    icon: Shield,
+    color: "purple",
+    services: ["Cert Manager"],
+  },
+  {
+    name: "AI/ML",
+    icon: Bot,
+    color: "purple",
+    services: ["KubeAI"],
   },
   {
     name: "Monitoring",
     icon: Activity,
     color: "purple",
-    services: ["Prometheus", "Grafana", "Loki", "Jaeger"],
+    services: ["VictoriaMetrics", "KubePrometheusStack", "Loki"],
   },
   {
-    name: "Service Mesh",
+    name: "Networking",
     icon: Network,
-    color: "emerald",
-    services: ["Istio", "Linkerd", "Consul"],
+    color: "purple",
+    services: ["MetalLB", "Nginx Ingress"],
   },
+
   {
-    name: "Security",
-    icon: Shield,
-    color: "amber",
-    services: ["Vault", "Cert Manager", "External Secrets"],
-  },
-  {
-    name: "Storage",
+    name: "Database",
     icon: Database,
-    color: "rose",
-    services: ["Longhorn", "MinIO", "Rook"],
-  },
-  {
-    name: "Ingress Controllers",
-    icon: Globe,
-    color: "cyan",
-    services: ["NGINX Ingress", "Traefik", "HAProxy"],
+    color: "purple",
+    services: ["MongoDB", "MySQL", "PostgreSQL", "Redis"],
   },
 ];
 
-const features = [
-  {
-    id: "cluster-management",
-    title: "Cluster Management",
-    icon: Cloud,
-    color: "blue",
-    description: "Simplified cluster creation and management",
-    details: [
-      {
-        title: "Creation",
-        items: ["Version selection", "Node configuration", "SSH integration"],
-      },
-      {
-        title: "Management",
-        items: ["Node scaling", "Version upgrades", "Backup management"],
-      },
-      {
-        title: "Access Control",
-        items: ["RBAC management", "Kubeconfig generation", "User management"],
-      },
-    ],
-  },
-  {
-    id: "monitoring",
-    title: "Monitoring",
-    icon: Activity,
-    color: "purple",
-    description: "Comprehensive monitoring and observability",
-    details: [
-      {
-        title: "Metrics",
-        items: [
-          "Resource utilization",
-          "Performance metrics",
-          "Custom metrics",
-        ],
-      },
-      {
-        title: "Logging",
-        items: ["Centralized logging", "Log aggregation", "Search & analysis"],
-      },
-      {
-        title: "Alerting",
-        items: ["Custom alerts", "Alert routing", "Incident management"],
-      },
-    ],
-  },
-  {
-    id: "security",
-    title: "Security",
-    icon: Shield,
-    color: "emerald",
-    description: "Enterprise-grade security features",
-    details: [
-      {
-        title: "Access Control",
-        items: ["RBAC policies", "Network policies", "Pod security"],
-      },
-      {
-        title: "Encryption",
-        items: ["TLS encryption", "Secret management", "Certificate rotation"],
-      },
-      {
-        title: "Compliance",
-        items: ["Security scanning", "Audit logging", "Compliance reports"],
-      },
-    ],
-  },
-  {
-    id: "marketplace",
-    title: "Marketplace",
-    icon: Blocks,
-    color: "amber",
-    description: "One-click application deployment",
-    details: [
-      {
-        title: "Applications",
-        items: ["Curated apps", "Version management", "Dependency handling"],
-      },
-      {
-        title: "Integration",
-        items: ["GitOps ready", "CI/CD tools", "Monitoring stacks"],
-      },
-      {
-        title: "Management",
-        items: ["Updates & patches", "Configuration", "Lifecycle management"],
-      },
-    ],
-  },
-  {
-    id: "networking",
-    title: "Networking",
-    icon: Network,
-    color: "rose",
-    description: "Advanced networking capabilities",
-    details: [
-      {
-        title: "Service Mesh",
-        items: ["Traffic management", "Service discovery", "Load balancing"],
-      },
-      {
-        title: "Ingress",
-        items: ["Automatic SSL/TLS", "Domain routing", "Traffic rules"],
-      },
-      {
-        title: "Security",
-        items: ["Network policies", "Encryption", "Access control"],
-      },
-    ],
-  },
-  {
-    id: "optimization",
-    title: "Optimization",
-    icon: Gauge,
-    color: "cyan",
-    description: "Intelligent resource optimization",
-    details: [
-      {
-        title: "Resources",
-        items: ["Auto-scaling", "Resource quotas", "Cost optimization"],
-      },
-      {
-        title: "Performance",
-        items: [
-          "Performance tuning",
-          "Bottleneck detection",
-          "Recommendations",
-        ],
-      },
-      {
-        title: "Efficiency",
-        items: ["Workload analysis", "Resource tracking", "Optimization tips"],
-      },
-    ],
-  },
-];
+// const features = [
+//   {
+//     id: "cluster-management",
+//     title: "Cluster Management",
+//     icon: Cloud,
+//     color: "blue",
+//     description: "Simplified cluster creation and management",
+//     details: [
+//       {
+//         title: "Creation",
+//         items: ["Version selection", "Node configuration", "SSH integration"],
+//       },
+//       {
+//         title: "Management",
+//         items: ["Node scaling", "Version upgrades", "Backup management"],
+//       },
+//       {
+//         title: "Access Control",
+//         items: ["RBAC management", "Kubeconfig generation", "User management"],
+//       },
+//     ],
+//   },
+//   {
+//     id: "monitoring",
+//     title: "Monitoring",
+//     icon: Activity,
+//     color: "purple",
+//     description: "Comprehensive monitoring and observability",
+//     details: [
+//       {
+//         title: "Metrics",
+//         items: [
+//           "Resource utilization",
+//           "Performance metrics",
+//           "Custom metrics",
+//         ],
+//       },
+//       {
+//         title: "Logging",
+//         items: ["Centralized logging", "Log aggregation", "Search & analysis"],
+//       },
+//       {
+//         title: "Alerting",
+//         items: ["Custom alerts", "Alert routing", "Incident management"],
+//       },
+//     ],
+//   },
+//   {
+//     id: "security",
+//     title: "Security",
+//     icon: Shield,
+//     color: "emerald",
+//     description: "Enterprise-grade security features",
+//     details: [
+//       {
+//         title: "Access Control",
+//         items: ["RBAC policies", "Network policies", "Pod security"],
+//       },
+//       {
+//         title: "Encryption",
+//         items: ["TLS encryption", "Secret management", "Certificate rotation"],
+//       },
+//       {
+//         title: "Compliance",
+//         items: ["Security scanning", "Audit logging", "Compliance reports"],
+//       },
+//     ],
+//   },
+//   {
+//     id: "marketplace",
+//     title: "Marketplace",
+//     icon: Blocks,
+//     color: "amber",
+//     description: "One-click application deployment",
+//     details: [
+//       {
+//         title: "Applications",
+//         items: ["Curated apps", "Version management", "Dependency handling"],
+//       },
+//       {
+//         title: "Integration",
+//         items: ["GitOps ready", "CI/CD tools", "Monitoring stacks"],
+//       },
+//       {
+//         title: "Management",
+//         items: ["Updates & patches", "Configuration", "Lifecycle management"],
+//       },
+//     ],
+//   },
+//   {
+//     id: "networking",
+//     title: "Networking",
+//     icon: Network,
+//     color: "rose",
+//     description: "Advanced networking capabilities",
+//     details: [
+//       {
+//         title: "Service Mesh",
+//         items: ["Traffic management", "Service discovery", "Load balancing"],
+//       },
+//       {
+//         title: "Ingress",
+//         items: ["Automatic SSL/TLS", "Domain routing", "Traffic rules"],
+//       },
+//       {
+//         title: "Security",
+//         items: ["Network policies", "Encryption", "Access control"],
+//       },
+//     ],
+//   },
+//   {
+//     id: "optimization",
+//     title: "Optimization",
+//     icon: Gauge,
+//     color: "cyan",
+//     description: "Intelligent resource optimization",
+//     details: [
+//       {
+//         title: "Resources",
+//         items: ["Auto-scaling", "Resource quotas", "Cost optimization"],
+//       },
+//       {
+//         title: "Performance",
+//         items: [
+//           "Performance tuning",
+//           "Bottleneck detection",
+//           "Recommendations",
+//         ],
+//       },
+//       {
+//         title: "Efficiency",
+//         items: ["Workload analysis", "Resource tracking", "Optimization tips"],
+//       },
+//     ],
+//   },
+// ];
 
 export function HKEPage() {
   const [heroRef, heroInView] = useInView();
@@ -198,7 +219,7 @@ export function HKEPage() {
   const [marketplaceRef, marketplaceInView] = useInView();
   const [featuresRef, featuresInView] = useInView();
 
-  const [activeFeature, setActiveFeature] = useState<string | null>(null);
+  // const [activeFeature, setActiveFeature] = useState<string | null>(null);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
   return (
@@ -229,13 +250,14 @@ export function HKEPage() {
               container orchestration without the complexity.
             </p>
             <div className="flex flex-col sm:flex-row items-center gap-4 pt-4">
-              <button className="cta-button w-full sm:w-auto bg-purple-600 hover:bg-purple-700 text-white px-8 py-4 rounded-full text-base font-medium transition-all duration-300 inline-flex items-center justify-center">
-                Start Free Trial{" "}
-                <ArrowRight className="ml-2 h-4 w-4 arrow-icon" />
-              </button>
-              <button className="w-full sm:w-auto px-8 py-4 rounded-full text-base font-medium transition-colors duration-300 border border-border hover:border-foreground">
+              <Link to="https://ui.hostspacecloud.com/login" target="_blank">
+                <button className="cta-button w-full sm:w-auto bg-purple-600 hover:bg-purple-700 text-white px-8 py-4 rounded-full text-base font-medium transition-all duration-300 inline-flex items-center justify-center">
+                  Get Started <ArrowRight className="ml-2 h-4 w-4 arrow-icon" />
+                </button>
+              </Link>
+              {/* <button className="w-full sm:w-auto px-8 py-4 rounded-full text-base font-medium transition-colors duration-300 border border-border hover:border-foreground">
                 Schedule Demo
-              </button>
+              </button> */}
             </div>
           </div>
         </div>
@@ -249,7 +271,7 @@ export function HKEPage() {
         ref={clusterRef}
         className={`py-24 relative ${clusterInView ? "fade-in" : ""}`}
       >
-        <div className="max-w-[1200px] mx-auto px-6">
+        <div className="max-w-[1200px] mx-auto px-6 text-left">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
               Create Clusters in Minutes
@@ -349,7 +371,7 @@ export function HKEPage() {
             {marketplaceCategories.map((category) => (
               <div
                 key={category.name}
-                className={`group relative bg-background/40 backdrop-blur-xl border border-white/10 p-8 rounded-xl transition-all duration-300 ${
+                className={` group relative bg-background/40 backdrop-blur-xl border border-input p-8 rounded-xl transition-all duration-300 ${
                   activeCategory === category.name
                     ? "scale-105 shadow-xl border-purple-500/50"
                     : "hover:scale-102 hover:shadow-lg"
@@ -384,12 +406,12 @@ export function HKEPage() {
                       </li>
                     ))}
                   </ul>
-                  <div className="mt-6 pt-6 border-t border-border/50">
+                  {/* <div className="mt-6 pt-6 border-t border-border/50">
                     <button className="text-sm font-medium text-purple-600 hover:text-purple-700 dark:text-purple-500 dark:hover:text-purple-400 inline-flex items-center gap-2">
                       View All Applications
                       <ArrowRight className="h-4 w-4" />
                     </button>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             ))}
@@ -397,11 +419,10 @@ export function HKEPage() {
 
           <div className="mt-16 text-center">
             <p className="text-muted-foreground mb-6">
-              Don't see what you need? Deploy any Kubernetes-compatible
-              application with our platform.
+              Don't see what you need? Go to Hostspace Kubernetes Engine
             </p>
             <button className="cta-button bg-purple-600 hover:bg-purple-700 text-white px-8 py-4 rounded-full text-base font-medium transition-all duration-300 inline-flex items-center justify-center">
-              Deploy Custom Application <Plus className="ml-2 h-4 w-4" />
+              Explore HKE marketplace <Plus className="ml-2 h-4 w-4" />
             </button>
           </div>
         </div>
@@ -412,16 +433,16 @@ export function HKEPage() {
         className={`py-24 relative ${featuresInView ? "fade-in" : ""}`}
       >
         <div className="max-w-[1200px] mx-auto px-6">
-          <div className="text-center mb-16">
+          {/* <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
               Enterprise-Grade Features
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Everything you need to run Kubernetes in production
             </p>
-          </div>
+          </div> */}
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature) => (
               <div
                 key={feature.id}
@@ -476,7 +497,7 @@ export function HKEPage() {
                 </div>
               </div>
             ))}
-          </div>
+          </div> */}
         </div>
       </section>
     </main>

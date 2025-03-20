@@ -8,18 +8,16 @@ import {
   Activity,
   Lock,
   Database,
-  Network,
   Workflow,
   Blocks,
   Layers,
-  Repeat,
-  Webhook,
   Play,
   Users,
   Search,
 } from "lucide-react";
 import { useInView } from "@/hooks/useInView";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const serviceCategories = [
   {
@@ -31,25 +29,25 @@ const serviceCategories = [
   {
     name: "Content Management",
     icon: Blocks,
-    color: "purple",
+    color: "blue",
     services: ["WordPress", "Directus"],
   },
   {
     name: "Development Tools",
     icon: Terminal,
-    color: "pink",
+    color: "blue",
     services: ["Gitea", "Jenkins"],
   },
   {
     name: "Database Tools",
     icon: Database,
-    color: "purple",
+    color: "blue",
     services: ["phpMyAdmin", "Adminer"],
   },
   {
     name: "File Management",
     icon: Layers,
-    color: "pink",
+    color: "blue",
     services: ["Filebrowser", "Nextcloud"],
   },
   {
@@ -61,7 +59,7 @@ const serviceCategories = [
   {
     name: "Monitoring",
     icon: Activity,
-    color: "pink",
+    color: "blue",
     services: ["Grafana", "Uptime Kuma"],
   },
   {
@@ -73,7 +71,7 @@ const serviceCategories = [
   {
     name: "Security",
     icon: Shield,
-    color: "purple",
+    color: "blue",
     services: ["Authentik", "Vaultwarden"],
   },
   {
@@ -105,7 +103,7 @@ const features = [
         items: ["Docker images", "Docker Compose"],
       },
       {
-        title: "Deployment Options",
+        title: "Deployment Actions",
         items: ["Pause Deployment", "Restart Deployment"],
       },
     ],
@@ -138,10 +136,10 @@ const features = [
     color: "pink",
     description: "Enterprise-grade security features",
     details: [
-      {
-        title: "Access Control",
-        items: ["Role-based access", "SSO integration", "API authentication"],
-      },
+      // {
+      //   title: "Access Control",
+      //   items: ["Role-based access", "SSO integration", "API authentication"],
+      // },
       {
         title: "Network Security",
         items: ["SSL/TLS encryption", "Network policies", "DDoS protection"],
@@ -152,73 +150,73 @@ const features = [
       },
     ],
   },
-  {
-    id: "scaling",
-    title: "Auto Scaling",
-    icon: Repeat,
-    color: "purple",
-    description: "Intelligent scaling based on demand",
-    details: [
-      {
-        title: "Scaling Types",
-        items: ["Horizontal scaling", "Vertical scaling", "Custom metrics"],
-      },
-      {
-        title: "Rules",
-        items: ["Load-based", "Schedule-based", "Event-driven"],
-      },
-      {
-        title: "Management",
-        items: ["Scale limits", "Cost optimization", "Performance tuning"],
-      },
-    ],
-  },
-  {
-    id: "networking",
-    title: "Networking",
-    icon: Network,
-    color: "blue",
-    description: "Advanced networking capabilities",
-    details: [
-      {
-        title: "Load Balancing",
-        items: ["Layer 7 routing", "SSL termination", "Health checks"],
-      },
-      {
-        title: "Service Discovery",
-        items: ["DNS integration", "Service mesh", "Service registry"],
-      },
-      {
-        title: "Traffic Management",
-        items: ["Rate limiting", "Circuit breaking", "Traffic splitting"],
-      },
-    ],
-  },
-  {
-    id: "automation",
-    title: "Automation",
-    icon: Webhook,
-    color: "purple",
-    description: "Powerful automation and integration",
-    details: [
-      {
-        title: "CI/CD",
-        items: [
-          "Pipeline integration",
-          "Automated testing",
-          "Release automation",
-        ],
-      },
-      {
-        title: "Webhooks",
-        items: ["Custom events", "Third-party integration", "Event routing"],
-      },
-      {
-        title: "API",
-        items: ["RESTful API", "GraphQL support", "API versioning"],
-      },
-    ],
-  },
+  // {
+  //   id: "scaling",
+  //   title: "Auto Scaling",
+  //   icon: Repeat,
+  //   color: "purple",
+  //   description: "Intelligent scaling based on demand",
+  //   details: [
+  //     {
+  //       title: "Scaling Types",
+  //       items: ["Horizontal scaling", "Vertical scaling", "Custom metrics"],
+  //     },
+  //     {
+  //       title: "Rules",
+  //       items: ["Load-based", "Schedule-based", "Event-driven"],
+  //     },
+  //     {
+  //       title: "Management",
+  //       items: ["Scale limits", "Cost optimization", "Performance tuning"],
+  //     },
+  //   ],
+  // },
+  // {
+  //   id: "networking",
+  //   title: "Networking",
+  //   icon: Network,
+  //   color: "blue",
+  //   description: "Advanced networking capabilities",
+  //   details: [
+  //     {
+  //       title: "Load Balancing",
+  //       items: ["Layer 7 routing", "SSL termination", "Health checks"],
+  //     },
+  //     {
+  //       title: "Service Discovery",
+  //       items: ["DNS integration", "Service mesh", "Service registry"],
+  //     },
+  //     {
+  //       title: "Traffic Management",
+  //       items: ["Rate limiting", "Circuit breaking", "Traffic splitting"],
+  //     },
+  //   ],
+  // },
+  // {
+  //   id: "automation",
+  //   title: "Automation",
+  //   icon: Webhook,
+  //   color: "purple",
+  //   description: "Powerful automation and integration",
+  //   details: [
+  //     {
+  //       title: "CI/CD",
+  //       items: [
+  //         "Pipeline integration",
+  //         "Automated testing",
+  //         "Release automation",
+  //       ],
+  //     },
+  //     {
+  //       title: "Webhooks",
+  //       items: ["Custom events", "Third-party integration", "Event routing"],
+  //     },
+  //     {
+  //       title: "API",
+  //       items: ["RESTful API", "GraphQL support", "API versioning"],
+  //     },
+  //   ],
+  // },
 ];
 
 export function HCSPage() {
@@ -258,13 +256,14 @@ export function HCSPage() {
               focus on code, not infrastructure.
             </p>
             <div className="flex flex-col sm:flex-row items-center gap-4 pt-4">
-              <button className="cta-button w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full text-base font-medium transition-all duration-300 inline-flex items-center justify-center">
-                Start Free Trial{" "}
-                <ArrowRight className="ml-2 h-4 w-4 arrow-icon" />
-              </button>
-              <button className="w-full sm:w-auto px-8 py-4 rounded-full text-base font-medium transition-colors duration-300 border border-border hover:border-foreground">
+              <Link to="https://ui.hostspacecloud.com/login" target="_blank">
+                <button className="cta-button w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full text-base font-medium transition-all duration-300 inline-flex items-center justify-center">
+                  Get Started <ArrowRight className="ml-2 h-4 w-4 arrow-icon" />
+                </button>
+              </Link>
+              {/* <button className="w-full sm:w-auto px-8 py-4 rounded-full text-base font-medium transition-colors duration-300 border border-border hover:border-foreground">
                 Schedule Demo
-              </button>
+              </button> */}
             </div>
           </div>
         </div>
@@ -418,12 +417,6 @@ export function HCSPage() {
                       </li>
                     ))}
                   </ul>
-                  <div className="mt-6  pt-6 border-t border-border/50 ">
-                    <button className="mt-auto text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-500 dark:hover:text-blue-400 inline-flex items-center gap-2">
-                      View All Services
-                      <ArrowRight className="h-4 w-4" />
-                    </button>
-                  </div>
                 </div>
               </div>
             ))}
@@ -461,7 +454,7 @@ export function HCSPage() {
             {features.map((feature) => (
               <div
                 key={feature.id}
-                className={`group relative bg-background/40 backdrop-blur-xl border border-input   p-8 rounded-xl transition-all duration-300 ${
+                className={`group text-left relative bg-background/40 backdrop-blur-xl border border-input   p-8 rounded-xl transition-all duration-300 ${
                   activeFeature === feature.id
                     ? "scale-105 shadow-xl border-blue-500/50"
                     : "hover:scale-102 hover:shadow-lg"

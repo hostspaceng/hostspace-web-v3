@@ -1,13 +1,7 @@
-import {
-  ArrowRight,
-  Shield,
-  Gauge,
-  Activity,
-  Workflow,
-  Sparkles,
-} from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 import { useInView } from "@/hooks/useInView";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const databaseTypes = [
   {
@@ -61,108 +55,108 @@ const databaseTypes = [
   },
 ];
 
-const features = [
-  {
-    id: "automation",
-    title: "Automated Management",
-    icon: Workflow,
-    color: "blue",
-    description: "Fully automated database operations",
-    details: [
-      {
-        title: "Provisioning",
-        items: [
-          "One-click setup",
-          "Configuration management",
-          "Resource allocation",
-        ],
-      },
-      {
-        title: "Maintenance",
-        items: ["Automated backups", "Version upgrades", "Patch management"],
-      },
-      {
-        title: "Scaling",
-        items: [
-          "Auto-scaling",
-          "Performance optimization",
-          "Resource balancing",
-        ],
-      },
-    ],
-  },
-  {
-    id: "security",
-    title: "Enterprise Security",
-    icon: Shield,
-    color: "purple",
-    description: "Bank-grade security features",
-    details: [
-      {
-        title: "Protection",
-        items: [
-          "Encryption at rest",
-          "SSL/TLS encryption",
-          "Network isolation",
-        ],
-      },
-      {
-        title: "Access Control",
-        items: ["IAM integration", "Role-based access", "IP allowlisting"],
-      },
-      {
-        title: "Compliance",
-        items: ["Audit logging", "Compliance reports", "Security scanning"],
-      },
-    ],
-  },
-  {
-    id: "reliability",
-    title: "High Availability",
-    icon: Activity,
-    color: "emerald",
-    description: "Enterprise-grade reliability",
-    details: [
-      {
-        title: "Replication",
-        items: [
-          "Automatic failover",
-          "Read replicas",
-          "Cross-zone replication",
-        ],
-      },
-      {
-        title: "Backup",
-        items: ["Point-in-time recovery", "Automated backups", "Quick restore"],
-      },
-      {
-        title: "Monitoring",
-        items: ["Health checks", "Performance metrics", "Proactive alerts"],
-      },
-    ],
-  },
-  {
-    id: "performance",
-    title: "Optimized Performance",
-    icon: Gauge,
-    color: "amber",
-    description: "Maximum database performance",
-    details: [
-      {
-        title: "Optimization",
-        items: ["Query optimization", "Index management", "Connection pooling"],
-      },
-      {
-        title: "Monitoring",
-        items: ["Real-time metrics", "Query analytics", "Resource usage"],
-      },
-      {
-        title: "Scaling",
-        items: ["Vertical scaling", "Read scaling", "Write scaling"],
-      },
-    ],
-  },
-];
+// const features = [
+//   {
+//     id: "automation",
+//     title: "Automated Management",
+//     icon: Workflow,
+//     color: "blue",
+//     description: "Fully automated database operations",
+//     details: [
+//       {
+//         title: "Provisioning",
+//         items: [
+//           "One-click setup",
+//           "Configuration management",
+//           "Resource allocation",
+//         ],
+//       },
+//       {
+//         title: "Maintenance",
+//         items: ["Automated backups", "Version upgrades", "Patch management"],
+//       },
+//       {
+//         title: "Scaling",
+//         items: [
+//           "Auto-scaling",
+//           "Performance optimization",
+//           "Resource balancing",
+//         ],
+//       },
+//     ],
+//   },
+//   {
+//     id: "security",
+//     title: "Enterprise Security",
+//     icon: Shield,
+//     color: "purple",
+//     description: "Bank-grade security features",
+//     details: [
+//       {
+//         title: "Protection",
+//         items: [
+//           "Encryption at rest",
+//           "SSL/TLS encryption",
+//           "Network isolation",
+//         ],
+//       },
+//       {
+//         title: "Access Control",
+//         items: ["IAM integration", "Role-based access", "IP allowlisting"],
+//       },
+//       {
+//         title: "Compliance",
+//         items: ["Audit logging", "Compliance reports", "Security scanning"],
+//       },
+//     ],
+//   },
+//   {
+//     id: "reliability",
+//     title: "High Availability",
+//     icon: Activity,
+//     color: "emerald",
+//     description: "Enterprise-grade reliability",
+//     details: [
+//       {
+//         title: "Replication",
+//         items: [
+//           "Automatic failover",
+//           "Read replicas",
+//           "Cross-zone replication",
+//         ],
+//       },
+//       {
+//         title: "Backup",
+//         items: ["Point-in-time recovery", "Automated backups", "Quick restore"],
+//       },
+//       {
+//         title: "Monitoring",
+//         items: ["Health checks", "Performance metrics", "Proactive alerts"],
+//       },
+//     ],
+//   },
+//   {
+//     id: "performance",
+//     title: "Optimized Performance",
+//     icon: Gauge,
+//     color: "amber",
+//     description: "Maximum database performance",
+//     details: [
+//       {
+//         title: "Optimization",
+//         items: ["Query optimization", "Index management", "Connection pooling"],
+//       },
+//       {
+//         title: "Monitoring",
+//         items: ["Real-time metrics", "Query analytics", "Resource usage"],
+//       },
+//       {
+//         title: "Scaling",
+//         items: ["Vertical scaling", "Read scaling", "Write scaling"],
+//       },
+//     ],
+//   },
+// ];
 
 const metrics = [
   {
@@ -187,9 +181,9 @@ export function HMDPage() {
   const [heroRef, heroInView] = useInView();
   const [metricsRef, metricsInView] = useInView();
   const [databasesRef, databasesInView] = useInView();
-  const [featuresRef, featuresInView] = useInView();
+  // const [featuresRef, featuresInView] = useInView();
 
-  const [activeFeature, setActiveFeature] = useState<string | null>(null);
+  // const [activeFeature, setActiveFeature] = useState<string | null>(null);
   const [activeDatabase, setActiveDatabase] = useState<string | null>(null);
 
   return (
@@ -206,9 +200,9 @@ export function HMDPage() {
           <div className="flex flex-col items-center text-center space-y-8">
             <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm font-medium bg-emerald-600/10 text-emerald-600">
               HostSpace Managed Databases
-              <span className="px-2 py-0.5 text-xs font-medium bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-300 rounded-full">
+              {/* <span className="px-2 py-0.5 text-xs font-medium bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-300 rounded-full">
                 Coming Soon
-              </span>
+              </span> */}
             </div>
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1]">
               Fully Managed
@@ -223,12 +217,14 @@ export function HMDPage() {
               optimized for performance.
             </p>
             <div className="flex flex-col sm:flex-row items-center gap-4 pt-4">
-              <button className="cta-button w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-full text-base font-medium transition-all duration-300 inline-flex items-center justify-center">
-                Join Waitlist <ArrowRight className="ml-2 h-4 w-4 arrow-icon" />
-              </button>
-              <button className="w-full sm:w-auto px-8 py-4 rounded-full text-base font-medium transition-colors duration-300 border border-border hover:border-foreground">
+              <Link to="https://ui.hostspacecloud.com/login" target="_blank">
+                <button className="cta-button w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-full text-base font-medium transition-all duration-300 inline-flex items-center justify-center">
+                  Get Started <ArrowRight className="ml-2 h-4 w-4 arrow-icon" />
+                </button>
+              </Link>
+              {/* <button className="w-full sm:w-auto px-8 py-4 rounded-full text-base font-medium transition-colors duration-300 border border-border hover:border-foreground">
                 View Documentation
-              </button>
+              </button> */}
             </div>
           </div>
         </div>
@@ -278,7 +274,7 @@ export function HMDPage() {
               return (
                 <div
                   key={database.name}
-                  className={`group relative bg-background/40 backdrop-blur-xl border border-white/10 p-8 rounded-xl transition-all duration-300 ${
+                  className={`group text-left relative bg-background/40 backdrop-blur-xl border border-white/10 p-8 rounded-xl transition-all duration-300 ${
                     activeDatabase === database.name
                       ? "scale-105 shadow-xl border-emerald-500/50"
                       : "hover:scale-102 hover:shadow-lg"
@@ -323,14 +319,24 @@ export function HMDPage() {
             })}
           </div>
         </div>
+        <div className="w-full flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+          <Link to="https://ui.hostspacecloud.com/login" target="_blank">
+            <button className="cta-button w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-full text-base font-medium transition-all duration-300 inline-flex items-center justify-center">
+              Get Started <ArrowRight className="ml-2 h-4 w-4 arrow-icon" />
+            </button>
+          </Link>
+          {/* <button className="w-full sm:w-auto px-8 py-4 rounded-full text-base font-medium transition-colors duration-300 border border-border hover:border-foreground">
+                View Documentation
+              </button> */}
+        </div>
       </section>
 
       {/* Features Grid */}
-      <section
+      {/* <section
         ref={featuresRef}
         className={`py-24 relative ${featuresInView ? "fade-in" : ""}`}
       >
-        <div className="max-w-[1200px] mx-auto px-6">
+        <div className="max-w-[1200px] mx-auto px-6 text-left">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
               Enterprise-Grade Features
@@ -397,10 +403,10 @@ export function HMDPage() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* CTA Section */}
-      <section className="py-24 relative">
+      <section className="py-24 relative hidden">
         <div className="max-w-[1200px] mx-auto px-6">
           <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-emerald-600 to-cyan-600">
             <div className="absolute inset-0 bg-grid-white/10" />

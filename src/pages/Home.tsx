@@ -70,7 +70,7 @@ export function HomePage() {
             powerful Kubernetes and container services.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 pt-4">
-            <Link to="https://ui.hostspacecloud.com/login">
+            <Link to="https://ui.hostspacecloud.com/login" target="_blank">
               <button className="cta-button w-full sm:w-auto bg-primary text-primary-foreground px-8 py-4 rounded-full text-base font-medium transition-all duration-300 inline-flex items-center justify-center">
                 Start Free Trial{" "}
                 <ArrowRight className="ml-2 h-4 w-4 arrow-icon" />
@@ -226,9 +226,12 @@ export function HomePage() {
                     </span>
                   </li>
                 </ul>
-                <button className="mt-4 cta-button bg-purple-600 hover:bg-purple-700 text-white px-8 py-4 rounded-full text-base font-medium transition-all duration-300 inline-flex items-center justify-center">
-                  Learn More <ArrowRight className="ml-2 h-4 w-4 arrow-icon" />
-                </button>
+                <Link to="products/kubernetes-engine">
+                  <button className="mt-4 cta-button bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full text-base font-medium transition-all duration-300 inline-flex items-center justify-center">
+                    Learn More{" "}
+                    <ArrowRight className="ml-2 h-4 w-4 arrow-icon" />
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -287,9 +290,12 @@ export function HomePage() {
                     </span>
                   </li>
                 </ul>
-                <button className="mt-4 cta-button bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full text-base font-medium transition-all duration-300 inline-flex items-center justify-center">
-                  Learn More <ArrowRight className="ml-2 h-4 w-4 arrow-icon" />
-                </button>
+                <Link to="products/managed-databases">
+                  <button className="mt-4 cta-button bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full text-base font-medium transition-all duration-300 inline-flex items-center justify-center">
+                    Learn More{" "}
+                    <ArrowRight className="ml-2 h-4 w-4 arrow-icon" />
+                  </button>
+                </Link>
               </div>
             </div>
             <div className="order-1 lg:order-2">

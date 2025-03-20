@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X, Box, Cloud, Database } from "lucide-react";
+import { Menu, X, Database } from "lucide-react";
 import { cn } from "@/lib/utils";
 import hsLogo from "/icons/hs-logo.svg";
 
@@ -77,12 +77,12 @@ export function Navbar() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => (
-              <div key={link.name} className="relative">
+              <div key={link.name} className="relative text-left">
                 {link.type === "dropdown" ? (
                   <div>
                     <button
                       onClick={() => handleDropdownToggle(link.name)}
-                      className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200 flex items-center gap-1"
+                      className="text-sm  text-muted-foreground hover:text-foreground transition-colors duration-200 flex items-center gap-1"
                     >
                       {link.name}
                       <svg
@@ -115,7 +115,7 @@ export function Navbar() {
                                   <div className="w-10 h-10 rounded-lg bg-white border shadow-sm flex items-center justify-center">
                                     {item.img && (
                                       <img
-                                        src={`./icons/${item.img}`}
+                                        src={`/icons/${item.img}`}
                                         className="p-1 object-cover text-foreground"
                                       />
                                     )}
@@ -222,7 +222,7 @@ export function Navbar() {
                             >
                               <div className="w-8 h-8 rounded-lg bg-white border shadow-sm flex items-center justify-center">
                                 <img
-                                  src={`./icons/${item.img}`}
+                                  src={`/icons/${item.img}`}
                                   className="h-4 w-4 text-foreground"
                                 />
                               </div>
@@ -251,9 +251,11 @@ export function Navbar() {
                 )}
               </div>
             ))}
-            <button className="w-full bg-primary text-primary-foreground rounded-full py-2 text-sm font-medium hover:opacity-90 transition-opacity">
-              Get Started
-            </button>
+            <Link to="https://ui.hostspacecloud.com/login" target="_blank">
+              <button className="w-full bg-primary text-primary-foreground rounded-full py-2 text-sm font-medium hover:opacity-90 transition-opacity">
+                Get Started
+              </button>
+            </Link>
           </div>
         </div>
       </div>
