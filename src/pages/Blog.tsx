@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useInView } from "@/hooks/useInView";
 import { Calendar, ArrowRight, Search } from "lucide-react";
 import { extractFirstParagraph } from "@/lib/helpers/removeHTMLTags";
+import { BlogLoadingSkeleton } from "@/components/BlogLoadingSkeleton";
 
 export interface BlogPost {
   guid: string;
@@ -23,9 +24,11 @@ export function BlogPage() {
   const [activeCategory, setActiveCategory] = useState("All Posts");
   const [searchQuery, setSearchQuery] = useState("");
   const [categories, setCategories] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function getBlogs() {
+      setIsLoading(true);
       try {
         const response = await fetch(
           `https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/HostSpaceng&api_key=vwuasxg9iloky36e5wienphw61n0vfvxpmz9ov9s&count=${20}`,
@@ -51,6 +54,8 @@ export function BlogPage() {
         console.log(data);
       } catch (error) {
         console.error("Error fetching blogs:", error);
+      } finally {
+        setIsLoading(false);
       }
     }
     getBlogs();
@@ -75,7 +80,6 @@ export function BlogPage() {
     return matchesSearch && matchesCategory;
   });
 
-  console.log(filteredBlogs);
   return (
     <main className="flex-1">
       {/* Hero Section */}
@@ -126,56 +130,62 @@ export function BlogPage() {
           <h2 className="text-3xl font-bold tracking-tight mb-12">
             Featured Articles
           </h2>
-          <div className="grid lg:grid-cols-2 gap-8">
-            {filteredBlogs?.slice(0, 2).map((blog) => (
-              <article key={blog.title} className="group">
-                <div className="relative overflow-hidden rounded-xl mb-6">
-                  <div className="absolute inset-0 bg-gradient-to-tr from-black/20 to-black/0 z-10" />
-                  <img
-                    src={blog?.description?.match(/<img.*?src="(.*?)"/)[1]}
-                    alt={blog.title}
-                    className="aspect-[2/1] object-cover w-full transform transition-transform duration-300 group-hover:scale-105"
-                  />
-                  <div className="absolute top-4 left-4 z-20">
-                    {blog.categories.slice(0, 3).map((category: string) => (
-                      <span className="capitalize mr-1.5 inline-flex items-center rounded-full px-3 py-1 text-sm font-medium bg-blue-600/90 text-white backdrop-blur-sm">
-                        {category}
-                      </span>
-                    ))}
+          {isLoading ? (
+            <BlogLoadingSkeleton />
+          ) : (
+            <div className="grid lg:grid-cols-2 gap-8">
+              {filteredBlogs?.slice(0, 2).map((blog) => (
+                <article key={blog.title} className="group">
+                  <div className="relative overflow-hidden rounded-xl mb-6">
+                    <div className="absolute inset-0 bg-gradient-to-tr from-black/20 to-black/0 z-10" />
+                    <img
+                      src={blog?.description?.match(/<img.*?src="(.*?)"/)[1]}
+                      alt={blog.title}
+                      className="aspect-[2/1] object-cover w-full transform transition-transform duration-300 group-hover:scale-105"
+                    />
+                    <div className="absolute top-4 left-4 z-20">
+                      {blog.categories.slice(0, 3).map((category: string) => (
+                        <span className="capitalize mr-1.5 inline-flex items-center rounded-full px-3 py-1 text-sm font-medium bg-blue-600/90 text-white backdrop-blur-sm">
+                          {category}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                </div>
-                <div className="space-y-4">
-                  <div className="flex items-center gap-4">
-                    <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 rounded-full border flex items-center justify-center p-1.5 overflow-hidden">
-                        {blog.author
-                          .split(" ")
-                          .map((word: string) => word[0])
-                          .join("")
-                          .toUpperCase()}
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-4">
+                      <div className="flex items-center gap-2">
+                        <div className="w-8 h-8 rounded-full border flex items-center justify-center p-1.5 overflow-hidden">
+                          {blog.author
+                            .split(" ")
+                            .map((word: string) => word[0])
+                            .join("")
+                            .toUpperCase()}
+                        </div>
+                        <span className="text-sm font-medium">
+                          {blog.author}
+                        </span>
                       </div>
-                      <span className="text-sm font-medium">{blog.author}</span>
+                      <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                        <span className="flex items-center gap-1">
+                          <Calendar className="h-4 w-4" />
+                          {blog.pubDate}
+                        </span>
+                      </div>
                     </div>
-                    <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                      <span className="flex items-center gap-1">
-                        <Calendar className="h-4 w-4" />
-                        {blog.pubDate}
-                      </span>
-                    </div>
+                    <h3 className="text-2xl font-bold group-hover:text-blue-600 transition-colors">
+                      {blog.title}
+                    </h3>
+                    <p className="text-muted-foreground line-clamp-3">
+                      {blog.content}
+                    </p>
+                    <button className="text-blue-600 font-medium inline-flex items-center gap-2 group-hover:gap-3 transition-all">
+                      Read More <ArrowRight className="h-4 w-4" />
+                    </button>
                   </div>
-                  <h3 className="text-2xl font-bold group-hover:text-blue-600 transition-colors">
-                    {blog.title}
-                  </h3>
-                  <p className="text-muted-foreground line-clamp-3">
-                    {blog.content}
-                  </p>
-                  <button className="text-blue-600 font-medium inline-flex items-center gap-2 group-hover:gap-3 transition-all">
-                    Read More <ArrowRight className="h-4 w-4" />
-                  </button>
-                </div>
-              </article>
-            ))}
-          </div>
+                </article>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -186,105 +196,113 @@ export function BlogPage() {
           postsInView ? "fade-in" : ""
         }`}
       >
-        <div className="max-w-[1200px] mx-auto px-6">
-          <div className="flex flex-col md:flex-row gap-12">
-            {/* Sidebar */}
-            <div className="w-full md:w-64 shrink-0 space-y-8">
-              <div>
-                <h3 className="text-lg font-semibold mb-4">Categories</h3>
-                <div className="space-y-2 h-96 overflow-scroll">
-                  {categories?.map((category) => {
-                    const count = blogs?.items?.filter((blog) =>
-                      blog.categories.includes(category)
-                    ).length;
+        {isLoading ? (
+          <BlogLoadingSkeleton />
+        ) : (
+          <div className="max-w-[1200px] mx-auto px-6">
+            <div className="flex flex-col md:flex-row gap-12">
+              {/* Sidebar */}
+              <div className="w-full md:w-64 shrink-0 space-y-8">
+                <div>
+                  <h3 className="text-lg font-semibold mb-4">Categories</h3>
+                  <div className="space-y-2 h-96 overflow-scroll">
+                    {categories?.map((category) => {
+                      const count = blogs?.items?.filter((blog) =>
+                        blog.categories.includes(category)
+                      ).length;
 
-                    return (
-                      <button
-                        key={category}
-                        onClick={() => setActiveCategory(category)}
-                        className={`capitalize block w-full text-left px-4 py-2 rounded-md  ${
-                          activeCategory === category
-                            ? "bg-blue-600 text-white"
-                            : "hover:bg-gray-100 dark:hover:bg-gray-800"
-                        }`}
-                      >
-                        {category}{" "}
-                        <span className="font-mono text-xs"> ({count})</span>
-                      </button>
-                    );
-                  })}
+                      return (
+                        <button
+                          key={category}
+                          onClick={() => setActiveCategory(category)}
+                          className={`capitalize block w-full text-left px-4 py-2 rounded-md  ${
+                            activeCategory === category
+                              ? "bg-blue-600 text-white"
+                              : "hover:bg-gray-100 dark:hover:bg-gray-800"
+                          }`}
+                        >
+                          {category}{" "}
+                          <span className="font-mono text-xs"> ({count})</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+
+              {/* Posts Grid */}
+              <div className="flex-1">
+                <div className="grid md:grid-cols-2 gap-8">
+                  {filteredBlogs?.slice(2).map((blog) => (
+                    <article key={blog.title} className="group text-left">
+                      <div className="relative overflow-hidden rounded-xl mb-4">
+                        <div className="absolute inset-0 bg-gradient-to-tr from-black/20 to-black/0 z-10" />
+                        <img
+                          src={
+                            blog?.description?.match(/<img.*?src="(.*?)"/)[1]
+                          }
+                          alt={blog.title}
+                          className="aspect-[2/1] object-cover w-full transform transition-transform duration-300 group-hover:scale-105"
+                        />
+                        <div className="absolute top-4 left-4 z-20">
+                          {blog.categories
+                            .slice(0, 3)
+                            .map((category: string) => (
+                              <span className="capitalize mr-1.5 inline-flex items-center rounded-full px-3 py-1 text-sm font-medium bg-blue-600/90 text-white backdrop-blur-sm">
+                                {category}
+                              </span>
+                            ))}
+                        </div>
+                      </div>
+                      <div className="space-y-3">
+                        <div className="flex items-center gap-4">
+                          <div className="flex items-center gap-2">
+                            <div className="w-6 h-6 rounded-full overflow-hidden">
+                              <div className="w-full h-full object-cover border p-1 rounded-full text-center flex items-center justify-center">
+                                <span className="text-muted-foreground text-xs">
+                                  {blog.author
+                                    .split(" ")
+                                    .map((word: string) => word[0])
+                                    .join("")
+                                    .toUpperCase()}
+                                </span>
+                              </div>
+                            </div>
+                            <span className="text-sm font-medium">
+                              {blog.author}
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                            <span className="flex items-center gap-1">
+                              <Calendar className="h-4 w-4" />
+                              {blog.pubDate}
+                            </span>
+                          </div>
+                        </div>
+                        <h3 className="text-xl font-bold group-hover:text-blue-600 transition-colors line-clamp-2">
+                          {blog.title}
+                        </h3>
+                        <p className="text-muted-foreground line-clamp-2">
+                          {blog.content}
+                        </p>
+                        <button className="text-blue-600 font-medium inline-flex items-center gap-2 group-hover:gap-3 transition-all">
+                          Read More <ArrowRight className="h-4 w-4" />
+                        </button>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+
+                <div className="mt-12 text-center">
+                  <button className="cta-button bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full text-base font-medium transition-all duration-300 inline-flex items-center justify-center">
+                    Load More Articles{" "}
+                    <ArrowRight className="ml-2 h-4 w-4 arrow-icon" />
+                  </button>
                 </div>
               </div>
             </div>
-
-            {/* Posts Grid */}
-            <div className="flex-1">
-              <div className="grid md:grid-cols-2 gap-8">
-                {filteredBlogs?.slice(2).map((blog) => (
-                  <article key={blog.title} className="group text-left">
-                    <div className="relative overflow-hidden rounded-xl mb-4">
-                      <div className="absolute inset-0 bg-gradient-to-tr from-black/20 to-black/0 z-10" />
-                      <img
-                        src={blog?.description?.match(/<img.*?src="(.*?)"/)[1]}
-                        alt={blog.title}
-                        className="aspect-[2/1] object-cover w-full transform transition-transform duration-300 group-hover:scale-105"
-                      />
-                      <div className="absolute top-4 left-4 z-20">
-                        {blog.categories.slice(0, 3).map((category: string) => (
-                          <span className="capitalize mr-1.5 inline-flex items-center rounded-full px-3 py-1 text-sm font-medium bg-blue-600/90 text-white backdrop-blur-sm">
-                            {category}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                    <div className="space-y-3">
-                      <div className="flex items-center gap-4">
-                        <div className="flex items-center gap-2">
-                          <div className="w-6 h-6 rounded-full overflow-hidden">
-                            <div className="w-full h-full object-cover border p-1 rounded-full text-center flex items-center justify-center">
-                              <span className="text-muted-foreground text-xs">
-                                {blog.author
-                                  .split(" ")
-                                  .map((word: string) => word[0])
-                                  .join("")
-                                  .toUpperCase()}
-                              </span>
-                            </div>
-                          </div>
-                          <span className="text-sm font-medium">
-                            {blog.author}
-                          </span>
-                        </div>
-                        <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                          <span className="flex items-center gap-1">
-                            <Calendar className="h-4 w-4" />
-                            {blog.pubDate}
-                          </span>
-                        </div>
-                      </div>
-                      <h3 className="text-xl font-bold group-hover:text-blue-600 transition-colors line-clamp-2">
-                        {blog.title}
-                      </h3>
-                      <p className="text-muted-foreground line-clamp-2">
-                        {blog.content}
-                      </p>
-                      <button className="text-blue-600 font-medium inline-flex items-center gap-2 group-hover:gap-3 transition-all">
-                        Read More <ArrowRight className="h-4 w-4" />
-                      </button>
-                    </div>
-                  </article>
-                ))}
-              </div>
-
-              <div className="mt-12 text-center">
-                <button className="cta-button bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full text-base font-medium transition-all duration-300 inline-flex items-center justify-center">
-                  Load More Articles{" "}
-                  <ArrowRight className="ml-2 h-4 w-4 arrow-icon" />
-                </button>
-              </div>
-            </div>
           </div>
-        </div>
+        )}
       </section>
 
       {/* Newsletter Section */}
