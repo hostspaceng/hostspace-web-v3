@@ -436,7 +436,7 @@ export function HMDPage() {
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-tr from-emerald-600/5 to-cyan-600/5 rounded-xl" />
               <div className="relative bg-background/40 backdrop-blur-xl border border-white/10 rounded-xl p-6">
-                <pre className="text-sm font-mono overflow-x-auto">
+                <pre className="text-sm !text-left font-mono overflow-x-auto">
                   <code className="language-yaml">
                     {
                       deploymentTypes.find((t) => t.title === activeDeployment)
