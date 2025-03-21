@@ -3,6 +3,7 @@ import { useInView } from "@/hooks/useInView";
 import { Calendar, ArrowRight, Search } from "lucide-react";
 import { extractFirstParagraph } from "@/lib/helpers/removeHTMLTags";
 import { BlogLoadingSkeleton } from "@/components/BlogLoadingSkeleton";
+import { Link } from "react-router-dom";
 
 export interface BlogPost {
   guid: string;
@@ -135,7 +136,7 @@ export function BlogPage() {
           ) : (
             <div className="grid lg:grid-cols-2 gap-8">
               {filteredBlogs?.slice(0, 2).map((blog) => (
-                <article key={blog.title} className="group">
+                <article key={blog.title} className="group text-left">
                   <div className="relative overflow-hidden rounded-xl mb-6">
                     <div className="absolute inset-0 bg-gradient-to-tr from-black/20 to-black/0 z-10" />
                     <img
@@ -178,9 +179,11 @@ export function BlogPage() {
                     <p className="text-muted-foreground line-clamp-3">
                       {blog.content}
                     </p>
-                    <button className="text-blue-600 font-medium inline-flex items-center gap-2 group-hover:gap-3 transition-all">
-                      Read More <ArrowRight className="h-4 w-4" />
-                    </button>
+                    <Link to={blog.link}>
+                      <button className="text-blue-600 font-medium inline-flex items-center gap-2 group-hover:gap-3 transition-all">
+                        Read More <ArrowRight className="h-4 w-4" />
+                      </button>
+                    </Link>
                   </div>
                 </article>
               ))}
@@ -285,9 +288,11 @@ export function BlogPage() {
                         <p className="text-muted-foreground line-clamp-2">
                           {blog.content}
                         </p>
-                        <button className="text-blue-600 font-medium inline-flex items-center gap-2 group-hover:gap-3 transition-all">
-                          Read More <ArrowRight className="h-4 w-4" />
-                        </button>
+                        <Link to={blog.link}>
+                          <button className="text-blue-600 font-medium inline-flex items-center gap-2 group-hover:gap-3 transition-all">
+                            Read More <ArrowRight className="h-4 w-4" />
+                          </button>
+                        </Link>
                       </div>
                     </article>
                   ))}
@@ -308,7 +313,7 @@ export function BlogPage() {
       {/* Newsletter Section */}
       <section
         ref={newsletterRef}
-        className={`py-24 relative ${newsletterInView ? "fade-in" : ""}`}
+        className={`py-24 relative hidden ${newsletterInView ? "fade-in" : ""}`}
       >
         <div className="max-w-[1200px] mx-auto px-6">
           <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-blue-600 to-cyan-600">
