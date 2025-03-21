@@ -49,7 +49,7 @@ export function HomePage() {
     getBlogs();
   }, []);
   return (
-    <main className="flex-1 max-w-[1200px] mx-auto px-6 pt-48 pb-24">
+    <main className="flex-1 w-full md:max-w-[1200px] mx-auto px-6 pt-48 pb-24">
       <div>
         {/* Hero Section */}
         <section
@@ -69,15 +69,15 @@ export function HomePage() {
             Deploy, manage, and scale your applications effortlessly with our
             powerful Kubernetes and container services.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 pt-4">
+          <div className="flex flex-row items-center justify-center gap-4 sm:gap-6 pt-4">
             <Link to="https://ui.hostspacecloud.com/login" target="_blank">
-              <button className="cta-button w-full sm:w-auto bg-primary text-primary-foreground px-8 py-4 rounded-full text-base font-medium transition-all duration-300 inline-flex items-center justify-center">
+              <button className="cta-button w-full sm:w-auto bg-primary text-primary-foreground px-4 md:px-8 py-4 rounded-full text-sm md:text-base font-medium transition-all duration-300 inline-flex items-center justify-center">
                 Start Free Trial{" "}
                 <ArrowRight className="ml-2 h-4 w-4 arrow-icon" />
               </button>
             </Link>
             <Link to="/pricing">
-              <button className="w-full sm:w-auto px-8 py-4 rounded-full text-base font-medium transition-colors duration-300 border border-border hover:border-foreground">
+              <button className="w-full sm:w-auto px-4 md:px-8 py-4 rounded-full text-sm md:text-base font-medium transition-colors duration-300 border border-border hover:border-foreground">
                 View Pricing
               </button>
             </Link>
@@ -328,7 +328,7 @@ export function HomePage() {
 
             <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
               {/* Testimonial 1 */}
-              <div className="relative bg-background/20 backdrop-blur-xl border border-white/10 shadow-xl p-8 rounded-xl">
+              <div className="text-left relative bg-background/20 backdrop-blur-xl border border-white/10 shadow-xl p-4 md:p-8 rounded-xl">
                 <div className="absolute -top-4 -left-4">
                   <Quote className="h-8 w-8 text-blue-600/20" />
                 </div>
@@ -354,7 +354,7 @@ export function HomePage() {
               </div>
 
               {/* Testimonial 2 */}
-              <div className="relative bg-background/20 backdrop-blur-xl border border-white/10 shadow-xl p-8 rounded-xl">
+              <div className="text-left relative bg-background/20 backdrop-blur-xl border border-white/10 shadow-xl p-4 md:p-8 rounded-xl">
                 <div className="absolute -top-4 -left-4">
                   <Quote className="h-8 w-8 text-purple-600/20" />
                 </div>
