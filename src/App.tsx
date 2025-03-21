@@ -12,6 +12,7 @@ import { BlogPost } from "@/pages/BlogPost";
 import { ContactPage } from "@/pages/Contact";
 import ScrollToTop from "./lib/helpers/scrollToTop";
 import { HMDPage } from "./pages/HMD";
+import { ChangelogPage } from "./pages/ChangeLog";
 
 function App() {
   return (
@@ -48,6 +49,7 @@ function App() {
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/logs" element={<ChangelogPage />} />
         </Routes>
         <Footer />
       </div>
