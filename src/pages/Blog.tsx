@@ -21,7 +21,10 @@ export function BlogPage() {
   const [featuredRef, featuredInView] = useInView();
   const [postsRef, postsInView] = useInView();
   const [newsletterRef, newsletterInView] = useInView();
-  const [blogs, setBlogs] = useState<{ items: BlogPost[] }>();
+  const [blogs, setBlogs] = useState<{
+    feed: { link: string };
+    items: BlogPost[];
+  }>();
   const [activeCategory, setActiveCategory] = useState("All Posts");
   const [searchQuery, setSearchQuery] = useState("");
   const [categories, setCategories] = useState<string[]>([]);
@@ -299,10 +302,12 @@ export function BlogPage() {
                 </div>
 
                 <div className="mt-12 text-center">
-                  <button className="cta-button bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full text-base font-medium transition-all duration-300 inline-flex items-center justify-center">
-                    Load More Articles{" "}
-                    <ArrowRight className="ml-2 h-4 w-4 arrow-icon" />
-                  </button>
+                  <Link to={blogs?.feed?.link ?? "#"}>
+                    <button className="cta-button bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full text-base font-medium transition-all duration-300 inline-flex items-center justify-center">
+                      Go to Medium
+                      <ArrowRight className="ml-2 h-4 w-4 arrow-icon" />
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>
