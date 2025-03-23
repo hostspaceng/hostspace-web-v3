@@ -223,10 +223,10 @@ export function HMDPage() {
   const [heroRef, heroInView] = useInView();
   const [databasesRef, databasesInView] = useInView();
   const [featuresRef, featuresInView] = useInView();
-  const [deploymentRef, deploymentInView] = useInView();
-  const [activeDeployment, setActiveDeployment] = useState(
-    deploymentTypes[0].title
-  );
+  // const [deploymentRef, deploymentInView] = useInView();
+  // const [activeDeployment, setActiveDeployment] = useState(
+  //   deploymentTypes[0].title
+  // );
 
   return (
     <main className="flex-1">
@@ -287,7 +287,7 @@ export function HMDPage() {
               return (
                 <div
                   key={db.name}
-                  className="group text-left relative bg-background/40 backdrop-blur-xl border border-white/10 p-8 rounded-xl hover-lift"
+                  className="group  text-left relative bg-background/40 backdrop-blur-xl border border-input p-8 rounded-xl hover-lift"
                 >
                   <div
                     className={`absolute inset-0 bg-gradient-to-tr from-${db.color}-600/5 to-${db.color}-400/5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity`}
