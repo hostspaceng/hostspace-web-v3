@@ -403,12 +403,12 @@ export function HomePage() {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {blogs?.slice(0, 3)?.map((blog: any) => {
                 return (
-                  <article className="group">
+                  <article className="group text-left">
                     <div className="relative overflow-hidden rounded-xl mb-4">
                       <div className="absolute inset-0 bg-gradient-to-tr from-black/20 to-black/0 z-10" />
                       <img
                         src={blog.description.match(/<img.*?src="(.*?)"/)[1]}
-                        alt="Kubernetes Best Practices"
+                        alt={blog.title}
                         className="aspect-[4/2.5] object-cover w-full transform transition-transform duration-300 group-hover:scale-105"
                       />
                       <div className="absolute top-4 left-4 z-20">
