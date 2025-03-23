@@ -1,14 +1,5 @@
-import {
-  ArrowRight,
-  Shield,
-  Box,
-  Terminal,
-  Lock,
-  Workflow,
-  CloudCog,
-} from "lucide-react";
+import { ArrowRight, Shield, Box, Lock, Workflow } from "lucide-react";
 import { useInView } from "@/hooks/useInView";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const supportedDatabases = [
@@ -143,79 +134,6 @@ const features = [
     description: "Automated backups, updates, and maintenance",
     icon: Workflow,
     color: "pink",
-  },
-];
-
-const deploymentTypes = [
-  {
-    title: "Docker Compose",
-    description: "Connect using Docker Compose with Cloudflare sidecar",
-    icon: Box,
-    code: `version: '3.8'
-
-services:
-  app:
-    image: your-app-image:latest
-    environment:
-      DATABASE_HOST: "cloudflared"
-      DATABASE_PORT: "5432"
-    depends_on:
-      - cloudflared
-    networks:
-      - app-network
-
-  cloudflared:
-    image: cloudflare/cloudflared:latest
-    command: ["access", "tcp", "--hostname", "ls0g0c.hcsapp.cloud", "--url", "0.0.0.0:5432"]
-    ports:
-      - "5432"
-    networks:
-      - app-network
-
-networks:
-  app-network:`,
-  },
-  {
-    title: "Kubernetes",
-    description: "Deploy with Kubernetes using sidecar container",
-    icon: CloudCog,
-    code: `apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: app-deployment
-spec:
-  template:
-    spec:
-      containers:
-      - name: app
-        env:
-        - name: DATABASE_HOST
-          value: "localhost"
-        - name: DATABASE_PORT
-          value: "5432"
-
-      - name: cloudflared
-        image: cloudflare/cloudflared:latest
-        args: ["access", "tcp", "--hostname", "ls0g0c.hcsapp.cloud", "--url", "0.0.0.0:5432"]
-        ports:
-        - containerPort: 5432`,
-  },
-  {
-    title: "Linux Service",
-    description: "Run as a systemd service on Linux servers",
-    icon: Terminal,
-    code: `[Unit]
-Description=Cloudflare Access Tunnel
-After=network.target
-
-[Service]
-ExecStart=/usr/local/bin/cloudflared access tcp --hostname ls0g0c.hcsapp.cloud --url 0.0.0.0:5432
-Restart=on-failure
-User=nobody
-Group=nogroup
-
-[Install]
-WantedBy=multi-user.target`,
   },
 ];
 

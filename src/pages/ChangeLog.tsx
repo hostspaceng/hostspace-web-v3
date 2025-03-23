@@ -1,30 +1,62 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Calendar, Tag, Search, Filter } from "lucide-react";
-import {
-  changelog,
-  getChangelogMarkdown,
-  parseMarkdown,
-} from "@/lib/changelog";
+import axios from "axios";
+import { parseMarkdown } from "@/lib/changelog";
+
+interface ChangelogEntry {
+  name: string;
+  body: string;
+  published_at: string;
+}
 
 export function ChangelogPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedVersion, setSelectedVersion] = useState<string | null>(null);
+  const [changelog, setChangelog] = useState<ChangelogEntry[]>([]);
+  const [filteredChangelog, setFilteredChangelog] = useState<ChangelogEntry[]>(
+    []
+  );
 
-  const filteredChangelog = changelog.filter((entry) => {
-    const matchesSearch =
-      entry.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      entry.description?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      entry.changes.some((change) =>
-        change.items.some((item) =>
-          item.toLowerCase().includes(searchQuery.toLowerCase())
-        )
+  useEffect(() => {
+    const fetchReleases = async () => {
+      try {
+        const response = await axios.get<ChangelogEntry[]>(
+          "https://api.github.com/repos/hostspaceng/aether/releases",
+          {
+            headers: {
+              Authorization: `Bearer ${
+                import.meta.env.VITE_GITHUB_PERSONAL_ACCESS_TOKEN
+              }`,
+            },
+          }
+        );
+        setChangelog(response.data);
+      } catch (error) {
+        console.error("Error fetching releases:", error);
+      }
+    };
+
+    fetchReleases();
+  }, []);
+
+  useEffect(() => {
+    let filtered = changelog;
+
+    if (selectedVersion) {
+      filtered = filtered.filter((entry) => entry.name === selectedVersion);
+    }
+
+    if (searchQuery) {
+      const query = searchQuery.toLowerCase();
+      filtered = filtered.filter(
+        (entry) =>
+          entry.name.toLowerCase().includes(query) ||
+          entry.body.toLowerCase().includes(query)
       );
+    }
 
-    const matchesVersion =
-      !selectedVersion || entry.version === selectedVersion;
-
-    return matchesSearch && matchesVersion;
-  });
+    setFilteredChangelog(filtered);
+  }, [changelog, searchQuery, selectedVersion]);
 
   return (
     <main className="flex-1 text-left mt-16">
@@ -56,12 +88,12 @@ export function ChangelogPage() {
           <select
             value={selectedVersion || ""}
             onChange={(e) => setSelectedVersion(e.target.value || null)}
-            className="px-4 py-2 rounded-lg bg-background border border-input focus:border-blue-600 focus:ring focus:ring-blue-600/20 transition-colors"
+            className="px-10 py-2 rounded-lg bg-background border border-input focus:border-blue-600 focus:ring focus:ring-blue-600/20 transition-colors"
           >
             <option value="">All Versions</option>
             {changelog.map((entry) => (
-              <option key={entry.version} value={entry.version}>
-                Version {entry.version}
+              <option key={entry.name} value={entry.name}>
+                Version {entry.name}
               </option>
             ))}
           </select>
@@ -69,37 +101,37 @@ export function ChangelogPage() {
 
         {/* Changelog Entries */}
         <div className="space-y-12">
-          {filteredChangelog.map((entry) => (
-            <div key={entry.version} className="relative">
-              {/* Version Badge */}
-              <div className="sticky top-4 z-10 mb-6 flex items-center gap-4">
-                <div className="inline-flex items-center rounded-full px-3 py-1 text-sm font-medium bg-blue-600/10 text-blue-600">
-                  <Tag className="mr-1.5 h-3.5 w-3.5" />
-                  Version {entry.version}
+          {filteredChangelog.length > 0 ? (
+            filteredChangelog.map((entry) => (
+              <div key={entry.name} className="relative">
+                {/* Version Badge */}
+                <div className="sticky top-4 z-10 mb-6 flex items-center gap-4">
+                  <div className="inline-flex items-center rounded-full px-3 py-1 text-sm font-medium bg-blue-600/10 text-blue-600">
+                    <Tag className="mr-1.5 h-3.5 w-3.5" />
+                    Version {entry.name}
+                  </div>
+                  <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
+                    <Calendar className="h-3.5 w-3.5" />
+                    {new Date(entry.published_at).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </div>
                 </div>
-                <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
-                  <Calendar className="h-3.5 w-3.5" />
-                  {new Date(entry.date).toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
+
+                {/* Changelog Content */}
+                <div className="bg-card border rounded-xl p-8">
+                  <div
+                    className="prose prose-blue dark:prose-invert max-w-none"
+                    dangerouslySetInnerHTML={{
+                      __html: parseMarkdown(entry.body),
+                    }}
+                  />
                 </div>
               </div>
-
-              {/* Changelog Content */}
-              <div className="bg-card border rounded-xl p-8">
-                <div
-                  className="prose prose-blue dark:prose-invert max-w-none"
-                  dangerouslySetInnerHTML={{
-                    __html: parseMarkdown(getChangelogMarkdown(entry)),
-                  }}
-                />
-              </div>
-            </div>
-          ))}
-
-          {filteredChangelog.length === 0 && (
+            ))
+          ) : (
             <div className="text-center py-12">
               <div className="w-12 h-12 rounded-full bg-blue-600/10 flex items-center justify-center mx-auto mb-4">
                 <Filter className="h-6 w-6 text-blue-600" />
