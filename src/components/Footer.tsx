@@ -41,7 +41,7 @@ const footerLinks = {
       subItems: [
         {
           name: "HostSpace Managed Databases",
-          href: "#",
+          href: "/products/managed-databases",
           // badge: "Coming Soon",
         },
       ],

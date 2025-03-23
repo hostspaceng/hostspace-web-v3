@@ -1,15 +1,11 @@
 import {
-  Database,
   ArrowRight,
   Shield,
-  Zap,
   Box,
   Terminal,
   Lock,
   Workflow,
-  Blocks,
   CloudCog,
-  Key,
 } from "lucide-react";
 import { useInView } from "@/hooks/useInView";
 import { useState } from "react";
@@ -18,8 +14,8 @@ import { Link } from "react-router-dom";
 const supportedDatabases = [
   {
     name: "PostgreSQL",
-    icon: Database,
-    color: "blue",
+    image: "/icons/postgresql.svg",
+    color: "emerald",
     status: "stable",
     description: "Advanced open-source relational database",
     features: [
@@ -31,8 +27,8 @@ const supportedDatabases = [
   },
   {
     name: "Redis",
-    icon: Zap,
-    color: "red",
+    image: "/icons/redis.svg",
+    color: "emerald",
     status: "stable",
     description: "In-memory data structure store",
     features: [
@@ -44,8 +40,8 @@ const supportedDatabases = [
   },
   {
     name: "MongoDB",
-    icon: Database,
-    color: "green",
+    image: "/icons/mongodb.svg",
+    color: "emerald",
     status: "stable",
     description: "Document-oriented NoSQL database",
     features: [
@@ -57,8 +53,8 @@ const supportedDatabases = [
   },
   {
     name: "MySQL",
-    icon: Database,
-    color: "orange",
+    image: "/icons/mysql.svg",
+    color: "emerald",
     status: "stable",
     description: "Popular open-source relational database",
     features: [
@@ -70,8 +66,8 @@ const supportedDatabases = [
   },
   {
     name: "MariaDB",
-    icon: Database,
-    color: "amber",
+    image: "/icons/mariadb.svg",
+    color: "emerald",
     status: "coming-soon",
     description: "Enhanced MySQL fork with additional features",
     features: [
@@ -83,8 +79,8 @@ const supportedDatabases = [
   },
   {
     name: "ClickHouse",
-    icon: Blocks,
-    color: "yellow",
+    image: "/icons/clickhouse.svg",
+    color: "emerald",
     status: "coming-soon",
     description: "Column-oriented DBMS for analytics",
     features: [
@@ -96,8 +92,8 @@ const supportedDatabases = [
   },
   {
     name: "DragonFly",
-    icon: Database,
-    color: "purple",
+    image: "/icons/dragonfly.svg",
+    color: "emerald",
     status: "coming-soon",
     description: "Modern in-memory datastore",
     features: [
@@ -109,8 +105,8 @@ const supportedDatabases = [
   },
   {
     name: "KeyDB",
-    icon: Key,
-    color: "indigo",
+    image: "/icons/keydb.svg",
+    color: "emerald",
     status: "coming-soon",
     description: "Multithreaded Redis alternative",
     features: [
@@ -146,7 +142,7 @@ const features = [
     title: "Automated Management",
     description: "Automated backups, updates, and maintenance",
     icon: Workflow,
-    color: "amber",
+    color: "pink",
   },
 ];
 
@@ -288,7 +284,6 @@ export function HMDPage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {supportedDatabases.map((db) => {
-              const Icon = db.icon;
               return (
                 <div
                   key={db.name}
@@ -301,7 +296,10 @@ export function HMDPage() {
                     <div
                       className={`w-12 h-12 rounded-lg bg-${db.color}-600/10 flex items-center justify-center mb-6`}
                     >
-                      <Icon className={`h-6 w-6 text-${db.color}-600`} />
+                      <img
+                        src={db.image}
+                        className={`h-6 w-6 text-${db.color}-600`}
+                      />
                     </div>
                     <div className="flex items-center gap-2 mb-4">
                       <h3 className="text-xl font-semibold">{db.name}</h3>
@@ -391,7 +389,7 @@ export function HMDPage() {
       </section>
 
       {/* Deployment Section */}
-      <section
+      {/* <section
         ref={deploymentRef}
         className={`py-24 relative ${deploymentInView ? "fade-in" : ""}`}
       >
@@ -448,7 +446,7 @@ export function HMDPage() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
     </main>
   );
 }
