@@ -21,19 +21,20 @@ const contactMethods = [
     value: "admin@hostspacecloud.com",
     link: "mailto:admin@hostspacecloud.com",
   },
-  {
-    icon: Phone,
-    title: "Phone",
-    description: "Mon-Fri from 8am to 5pm.",
-    value: "+234 (800) 123-4567",
-    link: "tel:+2348001234567",
-  },
+  // {
+  //   icon: Phone,
+  //   title: "Phone",
+  //   description: "Mon-Fri from 8am to 5pm.",
+  //   value: "+234 (800) 123-4567",
+  //   link: "tel:+2348001234567",
+  // },
   {
     icon: MapPin,
     title: "Office",
     description: "Come say hello at our office.",
     value: "Lagos, Nigeria",
-    link: "https://maps.google.com",
+    link: "#",
+    // link: "https://maps.google.com",
   },
 ];
 

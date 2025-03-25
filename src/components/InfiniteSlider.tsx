@@ -3,13 +3,14 @@ import { useEffect, useRef } from "react";
 interface Partner {
   name: string;
   color: string;
+  img: string;
 }
 
 const partners: Partner[] = [
-  { name: "Helium Health", color: "#2D5BFF" },
-  { name: "Nobus", color: "#00A67E" },
-  { name: "Helium Health", color: "#2D5BFF" },
-  { name: "Nobus", color: "#00A67E" },
+  { name: "Helium Health", color: "#2D5BFF", img: "/helium-health.svg" },
+  { name: "Nobus", color: "#00A67E", img: "/nobus.png" },
+  { name: "Helium Health", color: "#2D5BFF", img: "/helium-health.svg" },
+  { name: "Nobus", color: "#00A67E", img: "/nobus.png" },
 ];
 
 export function InfiniteSlider() {
@@ -45,7 +46,10 @@ export function InfiniteSlider() {
                   backgroundImage: `linear-gradient(to right, ${partner.color}, ${partner.color}88)`,
                 }}
               >
-                {partner.name}
+                <img
+                  src={`/icons/${partner.img}`}
+                  className="p-1 object-cover text-foreground"
+                />{" "}
               </span>
             </div>
           </div>

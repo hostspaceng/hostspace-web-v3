@@ -40,8 +40,6 @@ export function HomePage() {
         });
 
         setBlogs(processedBlogs);
-
-        console.log(processedBlogs);
       } catch (error) {
         console.error("Error fetching blogs:", error);
       }
@@ -247,7 +245,7 @@ export function HomePage() {
           <div className="relative grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <div className="order-2 lg:order-1 text-left">
               <div className="space-y-6">
-                <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm font-medium bg-blue-600/10 text-blue-600">
+                <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm font-medium bg-emerald-600/10 text-emerald-600">
                   HostSpace Managed Databases
                   {/* <span className="px-2 py-0.5 text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300 rounded-full">
                     Coming Soon
@@ -256,7 +254,7 @@ export function HomePage() {
                 <h2 className="text-3xl sm:text-4xl font-bold tracking-tight leading-tight">
                   Fully Managed
                   <br />
-                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-600">
+                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 to-cyan-600">
                     Database Solutions
                   </span>
                 </h2>
@@ -266,8 +264,8 @@ export function HomePage() {
                 </p>
                 <ul className="space-y-4">
                   <li className="flex items-start">
-                    <div className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-600/10 flex items-center justify-center">
-                      <div className="w-2 h-2 rounded-full bg-blue-600" />
+                    <div className="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-600/10 flex items-center justify-center">
+                      <div className="w-2 h-2 rounded-full bg-emerald-600" />
                     </div>
                     <span className="ml-3 text-muted-foreground">
                       Automated backups and recovery
@@ -282,8 +280,8 @@ export function HomePage() {
                     </span>
                   </li>
                   <li className="flex items-start">
-                    <div className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-600/10 flex items-center justify-center">
-                      <div className="w-2 h-2 rounded-full bg-blue-600" />
+                    <div className="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-600/10 flex items-center justify-center">
+                      <div className="w-2 h-2 rounded-full bg-emerald-600" />
                     </div>
                     <span className="ml-3 text-muted-foreground">
                       Automatic scaling and optimization
@@ -291,7 +289,7 @@ export function HomePage() {
                   </li>
                 </ul>
                 <Link to="products/managed-databases">
-                  <button className="mt-4 cta-button bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full text-base font-medium transition-all duration-300 inline-flex items-center justify-center">
+                  <button className="mt-4 cta-button bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-full text-base font-medium transition-all duration-300 inline-flex items-center justify-center">
                     Learn More{" "}
                     <ArrowRight className="ml-2 h-4 w-4 arrow-icon" />
                   </button>
@@ -300,9 +298,13 @@ export function HomePage() {
             </div>
             <div className="order-1 lg:order-2">
               <div className="relative fade-in hover-float">
-                <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 to-cyan-600/20 rounded-xl blur-3xl" />
-                <div className="h-[400px] rounded-2xl bg-gradient-to-r from-blue-600 to-cyan-600 flex items-center justify-center">
+                <div className="h-[400px] rounded-2xl bg-gradient-to-r from-emerald-600 to-cyan-600 flex items-end justify-end">
                   {/* <img src="/icons/HCS.svg" className="h-32 w-32" /> */}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 to-cyan-600/20 rounded-xl blur-3xl" />
+                  <img
+                    src="/mockups/HMD-mockup-1.png"
+                    className="object-contain rounded-2xl  flex items-center justify-center"
+                  />
                 </div>
               </div>
             </div>

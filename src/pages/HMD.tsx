@@ -182,6 +182,12 @@ export function HMDPage() {
             </div>
           </div>
         </div>
+        <div className="md:col-span-2 lg:col-span-4 pt-2">
+          <img
+            src="/mockups/HMD-mockup-3.png"
+            className="object-contain rounded-2xl  flex items-center justify-center"
+          />{" "}
+        </div>
       </section>
 
       {/* Databases Grid */}
@@ -201,6 +207,12 @@ export function HMDPage() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="md:col-span-2 lg:col-span-4">
+              <img
+                src="/mockups/HMD-mockup-2.png"
+                className="object-contain rounded-2xl  flex items-center justify-center"
+              />{" "}
+            </div>
             {supportedDatabases.map((db) => {
               return (
                 <div

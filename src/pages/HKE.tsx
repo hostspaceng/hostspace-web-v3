@@ -260,12 +260,14 @@ export function HKEPage() {
               </button> */}
             </div>
           </div>
+          <div className="md:col-span-2 lg:col-span-4 pt-2">
+            <img
+              src="/mockups/HKE-mockup-2.png"
+              className="object-contain rounded-2xl  flex items-center justify-center"
+            />{" "}
+          </div>
         </div>
       </section>
-      <img
-        src="/mockups/HKE-mockup-2.png"
-        className="object-contain rounded-2xl  flex items-center justify-center"
-      />{" "}
       {/* Cluster Creation Section */}
       <section
         ref={clusterRef}
@@ -343,13 +345,15 @@ export function HKEPage() {
               </div>
             </div>
           </div>
+          <div className="md:col-span-2 lg:col-span-4 pt-2">
+            <img
+              src="/mockups/HKE-mockup-1.png"
+              className="object-contain rounded-2xl  flex items-center justify-center"
+            />{" "}
+          </div>
         </div>
       </section>
       {/* Marketplace Section */}
-      <img
-        src="/mockups/HKE-mockup-1.png"
-        className="object-contain rounded-2xl  flex items-center justify-center"
-      />{" "}
       <section
         ref={marketplaceRef}
         className={`py-24 bg-purple-50/50 dark:bg-purple-950/20 relative ${
@@ -421,9 +425,11 @@ export function HKEPage() {
             <p className="text-muted-foreground mb-6">
               Don't see what you need? Go to Hostspace Kubernetes Engine
             </p>
-            <button className="cta-button bg-purple-600 hover:bg-purple-700 text-white px-8 py-4 rounded-full text-base font-medium transition-all duration-300 inline-flex items-center justify-center">
-              Explore HKE marketplace <Plus className="ml-2 h-4 w-4" />
-            </button>
+            <Link to="https://ui.hostspacecloud.com/login" target="_blank">
+              <button className="cta-button bg-purple-600 hover:bg-purple-700 text-white px-8 py-4 rounded-full text-base font-medium transition-all duration-300 inline-flex items-center justify-center">
+                Explore HKE marketplace <Plus className="ml-2 h-4 w-4" />
+              </button>
+            </Link>
           </div>
         </div>
       </section>
