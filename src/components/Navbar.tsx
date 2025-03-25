@@ -58,10 +58,10 @@ export function Navbar() {
   return (
     <nav
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-background/80 backdrop-blur-xl border-b ",
         isScrolled
           ? "bg-background/80 backdrop-blur-xl border-b"
-          : "bg-transparent"
+          : "bg-transparent md:bg-transparent md:backdrop-blur-0 md:border-0"
       )}
     >
       <div className="max-w-[1200px] mx-auto px-6">
@@ -176,7 +176,7 @@ export function Navbar() {
         {/* Mobile Navigation */}
         <div
           className={cn(
-            "md:hidden transition-all duration-300 ease-in-out",
+            "md:hidden transition-all duration-300 ease-in-out text-left",
             isMobileMenuOpen
               ? "max-h-96 opacity-100 pb-6"
               : "max-h-0 opacity-0 pointer-events-none"
