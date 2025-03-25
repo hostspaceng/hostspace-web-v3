@@ -134,7 +134,7 @@ export function ChangelogPage() {
                   {/* Changelog Content */}
                   <div className="bg-card border rounded-xl p-8">
                     <div
-                      className="prose prose-blue dark:prose-invert max-w-none"
+                      className="prose prose-blue dark:prose-invert max-w-none text-ellipsis overflow-scroll"
                       dangerouslySetInnerHTML={{
                         __html: parseMarkdown(entry.body),
                       }}
