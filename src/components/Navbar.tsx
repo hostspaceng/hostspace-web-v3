@@ -35,6 +35,7 @@ const navLinks = [
   { name: "About", href: "/about" },
   { name: "Careers", href: "/careers" },
   { name: "Change logs", href: "/logs" },
+  { name: "Contact us", href: "/contact" },
 ];
 
 export function Navbar() {
