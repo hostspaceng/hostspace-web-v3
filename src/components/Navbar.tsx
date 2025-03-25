@@ -153,9 +153,11 @@ export function Navbar() {
                 )}
               </div>
             ))}
-            <button className="px-4 py-2 bg-primary text-primary-foreground rounded-full text-sm font-medium hover:opacity-90 transition-opacity">
-              Get Started
-            </button>
+            <Link to="https://ui.hostspacecloud.com/login" target="_blank">
+              <button className="px-4 py-2 bg-primary text-primary-foreground rounded-full text-sm font-medium hover:opacity-90 transition-opacity">
+                Get Started
+              </button>
+            </Link>
           </div>
 
           {/* Mobile menu button */}
