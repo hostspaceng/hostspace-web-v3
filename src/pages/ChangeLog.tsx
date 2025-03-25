@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Calendar, Tag, Search, Filter } from "lucide-react";
 import axios from "axios";
 import { parseMarkdown } from "@/lib/changelog";
+import { ChangelogLoadingSkeleton } from "@/components/ChangeLogsLoadingState";
 
 interface ChangelogEntry {
   name: string;
@@ -10,6 +11,7 @@ interface ChangelogEntry {
 }
 
 export function ChangelogPage() {
+  const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedVersion, setSelectedVersion] = useState<string | null>(null);
   const [changelog, setChangelog] = useState<ChangelogEntry[]>([]);
@@ -19,6 +21,7 @@ export function ChangelogPage() {
 
   useEffect(() => {
     const fetchReleases = async () => {
+      setLoading(true);
       try {
         const response = await axios.get<ChangelogEntry[]>(
           "https://api.github.com/repos/hostspaceng/aether/releases",
@@ -33,6 +36,8 @@ export function ChangelogPage() {
         setChangelog(response.data);
       } catch (error) {
         console.error("Error fetching releases:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -100,50 +105,57 @@ export function ChangelogPage() {
         </div>
 
         {/* Changelog Entries */}
-        <div className="space-y-12">
-          {filteredChangelog.length > 0 ? (
-            filteredChangelog.map((entry) => (
-              <div key={entry.name} className="relative">
-                {/* Version Badge */}
-                <div className="sticky top-4 z-10 mb-6 flex items-center gap-4">
-                  <div className="inline-flex items-center rounded-full px-3 py-1 text-sm font-medium bg-blue-600/10 text-blue-600">
-                    <Tag className="mr-1.5 h-3.5 w-3.5" />
-                    Version {entry.name}
+        {loading ? (
+          <ChangelogLoadingSkeleton />
+        ) : (
+          <div className="space-y-12">
+            {filteredChangelog.length > 0 ? (
+              filteredChangelog.map((entry) => (
+                <div key={entry.name} className="relative">
+                  {/* Version Badge */}
+                  <div className="sticky top-4 z-10 mb-6 flex items-center gap-4">
+                    <div className="inline-flex items-center rounded-full px-3 py-1 text-sm font-medium bg-blue-600/10 text-blue-600">
+                      <Tag className="mr-1.5 h-3.5 w-3.5" />
+                      Version {entry.name}
+                    </div>
+                    <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
+                      <Calendar className="h-3.5 w-3.5" />
+                      {new Date(entry.published_at).toLocaleDateString(
+                        "en-US",
+                        {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                        }
+                      )}
+                    </div>
                   </div>
-                  <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
-                    <Calendar className="h-3.5 w-3.5" />
-                    {new Date(entry.published_at).toLocaleDateString("en-US", {
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
-                    })}
-                  </div>
-                </div>
 
-                {/* Changelog Content */}
-                <div className="bg-card border rounded-xl p-8">
-                  <div
-                    className="prose prose-blue dark:prose-invert max-w-none"
-                    dangerouslySetInnerHTML={{
-                      __html: parseMarkdown(entry.body),
-                    }}
-                  />
+                  {/* Changelog Content */}
+                  <div className="bg-card border rounded-xl p-8">
+                    <div
+                      className="prose prose-blue dark:prose-invert max-w-none"
+                      dangerouslySetInnerHTML={{
+                        __html: parseMarkdown(entry.body),
+                      }}
+                    />
+                  </div>
                 </div>
+              ))
+            ) : (
+              <div className="text-center py-12">
+                <div className="w-12 h-12 rounded-full bg-blue-600/10 flex items-center justify-center mx-auto mb-4">
+                  <Filter className="h-6 w-6 text-blue-600" />
+                </div>
+                <h3 className="text-lg font-semibold mb-2">No Results Found</h3>
+                <p className="text-muted-foreground">
+                  Try adjusting your search or filter to find what you're
+                  looking for.
+                </p>
               </div>
-            ))
-          ) : (
-            <div className="text-center py-12">
-              <div className="w-12 h-12 rounded-full bg-blue-600/10 flex items-center justify-center mx-auto mb-4">
-                <Filter className="h-6 w-6 text-blue-600" />
-              </div>
-              <h3 className="text-lg font-semibold mb-2">No Results Found</h3>
-              <p className="text-muted-foreground">
-                Try adjusting your search or filter to find what you're looking
-                for.
-              </p>
-            </div>
-          )}
-        </div>
+            )}
+          </div>
+        )}
       </div>
     </main>
   );
