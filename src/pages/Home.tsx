@@ -298,7 +298,7 @@ export function HomePage() {
             </div>
             <div className="order-1 lg:order-2">
               <div className="relative fade-in hover-float">
-                <div className="h-[400px] justify-center rounded-2xl bg-gradient-to-r from-emerald-600 to-cyan-600 flex items-end  px-[-10px]">
+                <div className="h-[200px] md:h-[350px] justify-center rounded-2xl bg-gradient-to-r from-emerald-600 to-cyan-600 flex items-end  px-[-10px]">
                   {/* <img src="/icons/HCS.svg" className="h-32 w-32" /> */}
                   <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 to-cyan-600/20 rounded-xl blur-3xl" />
                   <img

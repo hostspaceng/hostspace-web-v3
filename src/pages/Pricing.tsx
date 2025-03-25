@@ -325,7 +325,7 @@ export function Pricing() {
               )}
             >
               <Server className="h-4 w-4" />
-              Container Service
+              HCS
             </button>
             <button
               onClick={() => setActiveProduct("hke")}
@@ -337,7 +337,7 @@ export function Pricing() {
               )}
             >
               <Cloud className="h-4 w-4" />
-              Kubernetes Engine
+              HKE
             </button>
             <button
               onClick={() => setActiveProduct("db")}
@@ -349,7 +349,7 @@ export function Pricing() {
               )}
             >
               <Database className="h-4 w-4" />
-              Databases
+              HMDB
             </button>
           </div>
         </div>
