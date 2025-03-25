@@ -181,7 +181,7 @@ export function ContactPage() {
         className={`py-24 relative ${methodsInView ? "fade-in" : ""}`}
       >
         <div className="max-w-[1200px] mx-auto px-6">
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 gap-8 text-left">
             {contactMethods.map((method) => {
               const Icon = method.icon;
               return (
