@@ -146,6 +146,7 @@ export function Navbar() {
                   </div>
                 ) : (
                   <Link
+                    onClick={() => setActiveDropdown(null)}
                     to={link.href ?? "#"}
                     className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
                   >
