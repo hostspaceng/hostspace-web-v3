@@ -22,6 +22,12 @@ const stats = [
 
 const timeline = [
   {
+    year: "2020",
+    title: "HostSpace Web Hosting",
+    description:
+      "Initially launched, the platform focused on WordPress hosting, static site hosting, and affiliate domain purchases for other businesses.",
+  },
+  {
     year: "2023",
     title: "HostSpace Cloud Solutions",
     description:
