@@ -6,7 +6,7 @@ import {
   Zap,
   Globe,
   BookOpen,
-  Bike,
+  // Bike,
   Gift,
   Laptop,
   Plane,
@@ -136,11 +136,11 @@ const benefits = [
     title: "Internet Allowance",
     description: "Generous Monthly Budget for your Internet or Wi-Fi.",
   },
-  {
-    icon: Bike,
-    title: "Wellness Program",
-    description: "Monthly wellness allowance for gym, yoga, or meditation.",
-  },
+  // {
+  //   icon: Bike,
+  //   title: "Wellness Program",
+  //   description: "Monthly wellness allowance for gym, yoga, or meditation.",
+  // },
 ];
 
 export function CareersPage() {
@@ -149,6 +149,16 @@ export function CareersPage() {
   const [benefitsRef, benefitsInView] = useInView();
   const [positionsRef, positionsInView] = useInView();
   const [activeDepartment, setActiveDepartment] = useState("Engineering");
+  const scrollToPositions = () => {
+    if (positionsRef?.current) {
+      positionsRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+  const scrollToValues = () => {
+    if (valuesRef?.current) {
+      valuesRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <main className="flex-1">
@@ -177,11 +187,18 @@ export function CareersPage() {
               cloud infrastructure. Join our team and make an impact.
             </p>
             <div className="flex flex-col sm:flex-row items-center gap-4 pt-4">
-              <button className="cta-button w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full text-base font-medium transition-all duration-300 inline-flex items-center justify-center">
-                View Open Positions{" "}
+              <button
+                onClick={scrollToPositions}
+                className="cta-button w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full text-base font-medium transition-all duration-300 inline-flex items-center justify-center"
+              >
+                View Open Positions
                 <ArrowRight className="ml-2 h-4 w-4 arrow-icon" />
               </button>
-              <button className="w-full sm:w-auto px-8 py-4 rounded-full text-base font-medium transition-colors duration-300 border border-border hover:border-foreground">
+
+              <button
+                onClick={scrollToValues}
+                className="w-full sm:w-auto px-8 py-4 rounded-full text-base font-medium transition-colors duration-300 border border-border hover:border-foreground"
+              >
                 Learn About Culture
               </button>
             </div>
@@ -204,7 +221,7 @@ export function CareersPage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 text-left">
             {values.map((value) => {
               const Icon = value.icon;
               return (
@@ -252,7 +269,7 @@ export function CareersPage() {
               return (
                 <div
                   key={benefit.title}
-                  className="group relative bg-background/40 backdrop-blur-xl border border-white/10 p-8 rounded-xl hover-lift"
+                  className="group text-left relative bg-background/40 backdrop-blur-xl border border-white/10 p-8 rounded-xl hover-lift"
                 >
                   <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/5 to-cyan-600/5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity" />
                   <div className="relative">
@@ -310,7 +327,7 @@ export function CareersPage() {
               ?.positions.map((position: any) => (
                 <div
                   key={position.title}
-                  className="group relative bg-background/40 backdrop-blur-xl border border-white/10 p-8 rounded-xl hover-lift"
+                  className="text-left group relative bg-background/40 backdrop-blur-xl border border-white/10 p-8 rounded-xl hover-lift"
                 >
                   <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/5 to-cyan-600/5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity" />
                   <div className="relative flex flex-col md:flex-row md:items-center justify-between gap-6">

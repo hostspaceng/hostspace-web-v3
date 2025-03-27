@@ -255,7 +255,7 @@ export function Pricing() {
           description:
             "Fully managed database solutions for your applications.",
           plans: dbPlans,
-          icon: Database,
+          img: "/HMD-Icon.png",
           color: "emerald",
           showCalculator: true,
           // comingSoon: true,

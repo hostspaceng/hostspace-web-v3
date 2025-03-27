@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X, Database } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import hsLogo from "/icons/hs-logo.svg";
 
@@ -24,7 +24,7 @@ const navLinks = [
       {
         name: "HostSpace Managed Databases",
         href: "/products/managed-databases",
-        icon: Database,
+        img: "/HMD-Icon.png",
         description: "Fully managed database solutions",
         // badge: "Coming Soon",
       },
@@ -76,7 +76,7 @@ export function Navbar() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-8 ">
             {navLinks.map((link) => (
               <div key={link.name} className="relative text-left">
                 {link.type === "dropdown" ? (
@@ -104,7 +104,7 @@ export function Navbar() {
                     </button>
                     {activeDropdown === link.name && (
                       <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4">
-                        <div className="w-[520px] bg-background/80 backdrop-blur-xl border rounded-xl shadow-lg p-4">
+                        <div className="w-[520px] bg-white border rounded-xl shadow-lg p-4">
                           {link.items?.map((item) => (
                             <div key={item.name} className="space-y-2">
                               <Link
