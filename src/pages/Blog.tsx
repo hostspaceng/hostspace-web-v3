@@ -239,7 +239,7 @@ export function BlogPage() {
               {/* Posts Grid */}
               <div className="flex-1">
                 <div className="grid md:grid-cols-2 gap-8">
-                  {filteredBlogs?.slice(2).map((blog) => (
+                  {filteredBlogs?.map((blog) => (
                     <article key={blog.title} className="group text-left">
                       <div className="relative overflow-hidden rounded-xl mb-4">
                         <div className="absolute inset-0 bg-gradient-to-tr from-black/20 to-black/0 z-10" />
