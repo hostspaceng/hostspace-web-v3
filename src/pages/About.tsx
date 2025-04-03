@@ -174,9 +174,9 @@ export function AboutPage() {
               <div className="relative fade-in hover-float">
                 <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 to-cyan-600/20 rounded-xl blur-3xl" />
                 <img
-                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=1200&h=800"
-                  alt="Team Collaboration"
-                  className="relative rounded-xl shadow-2xl border border-white/10 hover-lift"
+                  src="./images/hostspace-about.jpg"
+                  alt="Hostspace Cloud Solution about page image"
+                  className="relative  rounded-xl grayscale shadow-2xl border border-white/10 hover-lift"
                   width={1200}
                   height={800}
                 />
