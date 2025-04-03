@@ -11,7 +11,7 @@ const socialLinks = [
     icon: Facebook,
     href: "https://www.facebook.com/hostspaceng/",
   },
-  { name: "Twitter", icon: Twitter, href: "#" },
+  { name: "Twitter", icon: Twitter, href: "https://x.com/hostspaceng" },
   {
     name: "Instagram",
     icon: Instagram,
