@@ -3,6 +3,7 @@ import { Check, Server, Cloud, Database } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { HMDPricingCalculator } from "@/components/HMDPricingCalculator";
 import { HKECalculator } from "@/components/HKEPricingCalculator";
+import { useSearchParams } from "react-router-dom";
 
 const hcsPlans = [
   {
@@ -206,9 +207,13 @@ const dbPlans = [
 ];
 
 export function Pricing() {
-  const [activeProduct, setActiveProduct] = useState<"hcs" | "hke" | "db">(
-    "hcs"
+  const params = useSearchParams();
+  const [searchParams] = params;
+  const product = searchParams.get("product");
+  const [activeProduct, setActiveProduct] = useState<"hcs" | "hke" | "hmdb">(
+    product ? (product as "hcs" | "hke" | "hmdb") : "hcs"
   );
+
   // const [loading, setLoading] = useState<string | null>(null);
 
   // const handleSubscribe = async (planName: string) => {
@@ -249,7 +254,7 @@ export function Pricing() {
           color: "purple",
           showCalculator: true,
         };
-      case "db":
+      case "hmdb":
         return {
           name: "HostSpace Managed Databases",
           description:
@@ -317,10 +322,10 @@ export function Pricing() {
               HKE
             </button>
             <button
-              onClick={() => setActiveProduct("db")}
+              onClick={() => setActiveProduct("hmdb")}
               className={cn(
                 "flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-colors",
-                activeProduct === "db"
+                activeProduct === "hmdb"
                   ? "bg-primary text-primary-foreground"
                   : "hover:bg-secondary-foreground/10"
               )}
@@ -429,7 +434,7 @@ export function Pricing() {
         {/* Pricing Calculator for Databases */}
         {productInfo.showCalculator && (
           <div className="my-16">
-            {activeProduct === "db" ? (
+            {activeProduct === "hmdb" ? (
               <HMDPricingCalculator />
             ) : (
               <HKECalculator />

@@ -261,9 +261,12 @@ export function HCSPage() {
                   Get Started <ArrowRight className="ml-2 h-4 w-4 arrow-icon" />
                 </button>
               </Link>
-              {/* <button className="w-full sm:w-auto px-8 py-4 rounded-full text-base font-medium transition-colors duration-300 border border-border hover:border-foreground">
-                Schedule Demo
-              </button> */}
+
+              <Link to="/pricing?product=hcs">
+                <button className="w-full sm:w-auto px-4 md:px-8 py-4 rounded-full text-sm md:text-base font-medium transition-colors duration-300 border border-border hover:border-foreground">
+                  View Pricing
+                </button>
+              </Link>
             </div>
           </div>
         </div>
