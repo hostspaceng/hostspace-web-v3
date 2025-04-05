@@ -179,7 +179,7 @@ export function HMDPage() {
                   Get Started <ArrowRight className="ml-2 h-4 w-4 arrow-icon" />
                 </button>
               </Link>
-              <Link to="/pricing?product=hmdb">
+              <Link to="/pricing?product=hmd">
                 <button className="w-full sm:w-auto px-4 md:px-8 py-4 rounded-full text-sm md:text-base font-medium transition-colors duration-300 border border-border hover:border-foreground">
                   View Pricing
                 </button>
