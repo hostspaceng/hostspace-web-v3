@@ -304,7 +304,7 @@ export function BlogPage() {
                 <div className="mt-12 text-center">
                   <Link to={blogs?.feed?.link ?? "#"}>
                     <button className="cta-button bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full text-base font-medium transition-all duration-300 inline-flex items-center justify-center">
-                      Go to Medium
+                      Explore More
                       <ArrowRight className="ml-2 h-4 w-4 arrow-icon" />
                     </button>
                   </Link>
