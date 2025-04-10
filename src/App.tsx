@@ -16,7 +16,7 @@ import { ChangelogPage } from "./pages/ChangeLog";
 
 function App() {
   return (
-    <Router>
+    <>
       <ScrollToTop />
       <div className="min-h-screen flex flex-col relative">
         {/* Background Elements */}
@@ -36,7 +36,6 @@ function App() {
           {/* Bottom-left gradient blob */}
           <div className="absolute -bottom-[30%] -left-[25%] w-[800px] h-[800px] rounded-full bg-gradient-to-tr from-purple-500/10 via-blue-500/10 to-transparent blur-3xl" />
         </div>
-
         <Navbar />
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -53,7 +52,7 @@ function App() {
         </Routes>
         <Footer />
       </div>
-    </Router>
+    </>
   );
 }
 
