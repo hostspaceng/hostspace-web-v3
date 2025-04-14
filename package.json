@@ -5,7 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "node server",
-    "build": "tsc -b && vite build",
+    "build:client": "vite build",
+    "build:server": "vite build --ssr src/entry-server.tsx",
+    "build": "vite build && NODE_SSR_BUILD=1 vite build --ssr src/entry-server.tsx",
+    "build-functions": "cd functions && npm run build && cd ..",
+    "copy-dist": "rm -rf functions/lib/dist && cp -r dist functions/lib/",
+    "deploy": "npm run build && npm run build-functions && npm run copy-dist && firebase deploy",
     "lint": "eslint .",
     "preview": "vite preview"
   },
